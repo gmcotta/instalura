@@ -36,7 +36,7 @@ MenuWrapper.CentralSide = styled.div`
     display: block;
     text-decoration: none;
     color: #88989E;
-    transition: 200ms ease-in-out;
+    transition: ${({theme}) => theme.transition};
 
     &:hover,
     &:focus {
