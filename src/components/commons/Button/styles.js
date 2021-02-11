@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import { TextStypeVariantsMap } from '../../foundation/Text';
 
 const GhostButton = css`
   background-color: transparent;
@@ -17,9 +18,11 @@ export const Button = styled.button`
   padding: 12px 26px;
   font-weight: bold;
   opacity: 1;
+  
   border-radius: ${({theme}) => theme.borderRadius};
   transition: ${({theme}) => theme.transition};
   ${({ghost}) => ghost ? GhostButton : DefaultButton};
+  ${TextStypeVariantsMap.smallestException}
 
   &:hover,
   &:focus {
