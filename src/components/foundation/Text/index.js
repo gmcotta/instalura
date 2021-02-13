@@ -18,6 +18,13 @@ export const TextStypeVariantsMap = {
 
 const TextBase = styled.span`
   ${({ variant }) => TextStypeVariantsMap[variant]};
+  ${({ tag }) => {
+    if (tag === 'a') {
+      return css`
+        cursor: pointer;
+      `;
+    }
+  }};
 `;
 
 export default function Text({ tag, variant, children }) {
