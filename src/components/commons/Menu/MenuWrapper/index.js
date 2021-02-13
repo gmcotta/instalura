@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
-import { TextStypeVariantsMap } from '../../foundation/Text';
+import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia';
+import { TextStypeVariantsMap } from '../../../foundation/Text';
 
 export const MenuWrapper = styled.nav`
   font-family: 'Rubik', sans-serif;
