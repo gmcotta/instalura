@@ -3,6 +3,7 @@ import get from 'lodash/get';
 
 import { TextStypeVariantsMap } from '../../foundation/Text';
 import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
+import { propToStyle } from '../../../theme/utils/propToStyle';
 
 const GhostButton = css`
   background-color: transparent;
@@ -14,7 +15,7 @@ const DefaultButton = css`
   color: ${({theme, variant}) => get(theme, `colors.${variant}.contrastText`)};
 `;
 
-export const Button = styled.button`
+const Button = styled.button`
   border: 0;
   cursor: pointer;
   padding: 12px 26px;
@@ -31,6 +32,9 @@ export const Button = styled.button`
     opacity: 0.5;
   }
 
+  ${propToStyle('margin')};
+  ${propToStyle('display')};
+
   ${breakpointsMedia({
     xs: css`
       ${TextStypeVariantsMap.smallestException}
@@ -40,3 +44,5 @@ export const Button = styled.button`
     `,
   })}
 `;
+
+export default Button;
