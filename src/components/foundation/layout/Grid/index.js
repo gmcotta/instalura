@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { breakpointsMedia } from '../../../../theme/utils/breakpointsMedia';
+import { propToStyle } from '../../../../theme/utils/propToStyle';
 
 const Container = styled.div`
   width: 100%;
@@ -9,6 +10,8 @@ const Container = styled.div`
   margin-right: auto;
   margin-left: auto;
   max-width: initial;
+
+  ${propToStyle('marginTop')};
 
   ${breakpointsMedia({
     sm: css`
@@ -42,6 +45,11 @@ const Col = styled.div`
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
+
+  ${propToStyle('display')};
+  ${propToStyle('flexDirection')};
+  ${propToStyle('alignItems')};
+  ${propToStyle('justifyContent')};
 
   ${({ value }) => {
     if (typeof value === 'number') {
@@ -122,11 +130,13 @@ const Col = styled.div`
   }};
 `;
 
-export const Grid = {
+const Grid = {
   Container,
   Row, 
   Col,
 };
+
+export default Grid;
 
 Col.defaultProps = {
   value: {},
