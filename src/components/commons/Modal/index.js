@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -13,6 +14,8 @@ const ModalWrapper = styled.div`
   bottom: 0;
   margin: auto;
   overflow: scroll;
+  transition: 0.3s;
+  z-index: 100;
 
   ${({ isOpen }) => {
     if (!isOpen) {
@@ -40,9 +43,28 @@ export default function Modal({isOpen, onClose, children }) {
         }
       }}
     >
-      {children({
-        'data-modal-safe-area': 'true',
-      })}
+      <motion.div
+        variants={{
+          opened: {
+            x: 0,
+          },
+          closed: {
+            x: '-100%'
+          }
+        }}
+        transition={{
+          duration: 0.2,
+        }}
+        animate={isOpen ? 'opened' : 'closed'}
+        style={{
+          display: 'flex',
+          flex: 1,
+        }}
+      >
+        {children({
+          'data-modal-safe-area': 'true',
+        })}
+      </motion.div>
     </ModalWrapper>
   )
 }
