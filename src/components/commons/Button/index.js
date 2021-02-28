@@ -43,6 +43,15 @@ const Button = styled.button`
       ${TextStypeVariantsMap.paragraph1}
     `,
   })}
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.2;
+  }
+
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+  `};
 `;
 
 export default Button;

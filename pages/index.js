@@ -7,11 +7,12 @@ import Modal from '../src/components/commons/Modal';
 import Text from '../src/components/foundation/Text';
 import Box from '../src/components/foundation/layout/Box';
 import Grid from '../src/components/foundation/layout/Grid';
+import FormCadastro from '../src/components/patterns/FormCadastro';
 
 
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   function openModal() {
     setIsModalOpen(true);
@@ -34,14 +35,7 @@ export default function Home() {
     >
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {(modalProps) => (
-          <Box 
-            backgroundColor="white" 
-            {...modalProps}
-          >
-            <div>
-              Conteúdo do modal
-            </div>
-          </Box>
+          <FormCadastro modalProps={modalProps} />
         )}
       </Modal>
       <Menu />

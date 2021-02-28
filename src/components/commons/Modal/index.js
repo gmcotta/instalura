@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
@@ -13,7 +13,7 @@ const ModalWrapper = styled.div`
   right: 0;
   bottom: 0;
   margin: auto;
-  overflow: scroll;
+  overflow: hidden;
   transition: 0.3s;
   z-index: 100;
 
@@ -31,6 +31,13 @@ const ModalWrapper = styled.div`
   }}
 `;
 
+const LockScroll = createGlobalStyle`
+  ${console.log('lockScroll')};
+  body {
+    overflow: hidden;
+  }
+`;
+
 export default function Modal({isOpen, onClose, children }) {
   console.log
   return (
@@ -43,13 +50,14 @@ export default function Modal({isOpen, onClose, children }) {
         }
       }}
     >
+      {isOpen && <LockScroll />}
       <motion.div
         variants={{
           opened: {
             x: 0,
           },
           closed: {
-            x: '-100%'
+            x: '100%'
           }
         }}
         transition={{
