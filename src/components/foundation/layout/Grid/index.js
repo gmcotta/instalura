@@ -37,6 +37,11 @@ const Row = styled.div`
   margin-right: -16px;
   margin-left: -16px;
 
+  ${propToStyle('flex')};
+  ${propToStyle('marginLeft')};
+  ${propToStyle('marginRight')};
+  ${propToStyle('justifyContent')};
+
 `;
 
 const Col = styled.div`
@@ -50,6 +55,8 @@ const Col = styled.div`
   ${propToStyle('flexDirection')};
   ${propToStyle('alignItems')};
   ${propToStyle('justifyContent')};
+  ${propToStyle('paddingLeft')};
+  ${propToStyle('paddingRight')};
 
   ${({ value }) => {
     if (typeof value === 'number') {
@@ -90,7 +97,7 @@ const Col = styled.div`
           max-width: 0 0 ${(100 * value.xl) / 12}%;
         `,
       }),
-    })
+    });
   }};
 
   ${({ offset }) => {
@@ -126,13 +133,13 @@ const Col = styled.div`
           margin-left: ${(100 * offset.xl) / 12}%;
         `,
       }),
-    })
+    });
   }};
 `;
 
 const Grid = {
   Container,
-  Row, 
+  Row,
   Col,
 };
 

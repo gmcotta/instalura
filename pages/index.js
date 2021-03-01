@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Menu from '../src/components/commons/Menu';
 import Footer from '../src/components/commons/Footer';
 import Button from '../src/components/commons/Button';
+import Modal from '../src/components/commons/Modal';
 import Text from '../src/components/foundation/Text';
 import Box from '../src/components/foundation/layout/Box';
 import Grid from '../src/components/foundation/layout/Grid';
+import FormCadastro from '../src/components/patterns/FormCadastro';
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  function openModal() {
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+  }
+
   return (
     <Box
       flex={1}
@@ -19,6 +31,11 @@ export default function Home() {
       backgroundRepeat="no-repeat"
       backgroundPosition="bottom right"
     >
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {(modalProps) => (
+          <FormCadastro modalProps={modalProps} onClose={closeModal} />
+        )}
+      </Modal>
       <Menu />
 
       <Grid.Container
@@ -67,6 +84,7 @@ export default function Home() {
                 xs: 'auto',
                 md: 'initial',
               }}
+              onClick={openModal}
             >
               Cadastrar
             </Button>
