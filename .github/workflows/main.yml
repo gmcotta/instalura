@@ -22,6 +22,8 @@ jobs:
           
       - name: Node Version
         run: node -v
+      - name: Install Packages
+        run: yarn install
       - name: Run linter
         run: yarn lint
   
