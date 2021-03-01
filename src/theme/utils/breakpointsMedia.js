@@ -3,7 +3,7 @@ import theme from '../index';
 
 const { breakpoints } = theme;
 
-export function breakpointsMedia(cssByBreakpoints) {
+function breakpointsMedia(cssByBreakpoints) {
   const breakpointsNames = Object.keys(cssByBreakpoints);
   return breakpointsNames
     .filter((breakpointName) => Boolean(cssByBreakpoints[breakpointName]))
@@ -13,3 +13,5 @@ export function breakpointsMedia(cssByBreakpoints) {
       }
     `);
 }
+
+export default breakpointsMedia;

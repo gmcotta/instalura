@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 
 import { TextStypeVariantsMap } from '../../foundation/Text';
-import { breakpointsMedia } from '../../../theme/utils/breakpointsMedia';
-import { propToStyle } from '../../../theme/utils/propToStyle';
+import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
+import propToStyle from '../../../theme/utils/propToStyle';
 
 const GhostButton = css`
   background-color: transparent;
