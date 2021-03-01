@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { GlobalStyle } from '../src/theme/GlobalStyle';
+import GlobalStyle from '../src/theme/GlobalStyle';
 import theme from '../src/theme';
 
 export default function App({ Component, pageProps }) {
