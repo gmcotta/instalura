@@ -35,7 +35,7 @@ export default function Home() {
     >
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {(modalProps) => (
-          <FormCadastro modalProps={modalProps} />
+          <FormCadastro modalProps={modalProps} onClose={closeModal} />
         )}
       </Modal>
       <Menu />

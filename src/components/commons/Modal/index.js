@@ -2,6 +2,8 @@ import styled, { css, createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
+import Button from '../Button';
+
 const ModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,7 +41,6 @@ const LockScroll = createGlobalStyle`
 `;
 
 export default function Modal({isOpen, onClose, children }) {
-  console.log
   return (
     <ModalWrapper 
       isOpen={isOpen} 
@@ -67,8 +68,17 @@ export default function Modal({isOpen, onClose, children }) {
         style={{
           display: 'flex',
           flex: 1,
+          position: 'relative'
         }}
       >
+        <Button ghost onClick={onClose} style={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          padding: '0'
+        }}>
+          <img src="/images/close.svg" alt="Fechar Modal" />
+        </Button>
         {children({
           'data-modal-safe-area': 'true',
         })}
