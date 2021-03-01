@@ -79,15 +79,15 @@ MenuWrapper.CentralSide = styled.div`
     display: block;
     text-decoration: none;
     color: #88989E;
-    transition: ${({theme}) => theme.transition};
+    transition: ${({ theme }) => theme.transition};
     ${breakpointsMedia({
-      xs: css`
+    xs: css`
         ${TextStypeVariantsMap.smallestException};
       `,
-      md: css`
+    md: css`
         ${TextStypeVariantsMap.paragraph1}
-      `
-    })}
+      `,
+  })}
 
     &:hover,
     &:focus {

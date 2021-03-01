@@ -7,12 +7,12 @@ import { propToStyle } from '../../../theme/utils/propToStyle';
 
 const GhostButton = css`
   background-color: transparent;
-  color: ${({theme, variant}) => get(theme, `colors.${variant}.color`)};
+  color: ${({ theme, variant }) => get(theme, `colors.${variant}.color`)};
 `;
 
 const DefaultButton = css`
-  background-color: ${({theme, variant}) => get(theme, `colors.${variant}.color`)};
-  color: ${({theme, variant}) => get(theme, `colors.${variant}.contrastText`)};
+  background-color: ${({ theme, variant }) => get(theme, `colors.${variant}.color`)};
+  color: ${({ theme, variant }) => get(theme, `colors.${variant}.contrastText`)};
 `;
 
 const Button = styled.button`
@@ -22,9 +22,9 @@ const Button = styled.button`
   font-weight: bold;
   opacity: 1;
   
-  border-radius: ${({theme}) => theme.borderRadius};
-  transition: ${({theme}) => theme.transition};
-  ${({ghost}) => ghost ? GhostButton : DefaultButton};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  transition: ${({ theme }) => theme.transition};
+  ${({ ghost }) => (ghost ? GhostButton : DefaultButton)};
   ${TextStypeVariantsMap.smallestException};
   
   &:hover,
@@ -43,6 +43,15 @@ const Button = styled.button`
       ${TextStypeVariantsMap.paragraph1}
     `,
   })}
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.2;
+  }
+
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+  `};
 `;
 
 export default Button;

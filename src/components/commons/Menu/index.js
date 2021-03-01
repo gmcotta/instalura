@@ -3,26 +3,26 @@ import React from 'react';
 import Logo from '../../../theme/Logo';
 import Text from '../../foundation/Text';
 import Button from '../Button';
-import {MenuWrapper} from './MenuWrapper';
+import { MenuWrapper } from './MenuWrapper';
 
 export default function Menu() {
   const links = [
     {
       id: 1,
       texto: 'Home',
-      url: '/'
+      url: '/',
     },
     {
       id: 2,
       texto: 'Perguntas Frequentes',
-      url: '/faq'
+      url: '/faq',
     },
     {
       id: 3,
       texto: 'Sobre',
-      url: '/sobre'
+      url: '/sobre',
     },
-  ]
+  ];
   return (
     <MenuWrapper>
       <MenuWrapper.LeftSide>
@@ -30,11 +30,11 @@ export default function Menu() {
       </MenuWrapper.LeftSide>
       <MenuWrapper.CentralSide>
         {
-          links.map(link => (
-            <Text 
-              tag="a" 
-              variant="smallestException" 
-              key={link.id} 
+          links.map((link) => (
+            <Text
+              tag="a"
+              variant="smallestException"
+              key={link.id}
               href={link.url}
             >
               {link.texto}

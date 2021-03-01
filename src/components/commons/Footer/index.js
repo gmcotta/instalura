@@ -32,9 +32,9 @@ export default function Footer(props) {
     // eslint-disable-next-line react/jsx-props-no-spreading
     <FooterWrapper {...props}>
       <a href="https://www.alura.com.br/">
-        <img 
-          src="https://www.alura.com.br/assets/img/alura-logo.svg" 
-          alt="Logo Alura" 
+        <img
+          src="https://www.alura.com.br/assets/img/alura-logo.svg"
+          alt="Logo Alura"
         />
       </a>
       <p>
@@ -48,4 +48,4 @@ export default function Footer(props) {
       </p>
     </FooterWrapper>
   );
-} 
+}

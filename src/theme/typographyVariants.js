@@ -1,4 +1,3 @@
-
 export const typographyVariants = {
   // [title]
   title: {

@@ -40,40 +40,40 @@ export const colors = {
   modes: {
     dark: {
       background: {
-    light: {
-      color: '#FFFFFF',
-    },
-    main: {
-      color: '#181F22',
-    },
-  },
-  borders: {
-    main: {
-      color: '#181F22',
-    },
-  },
-  primary: {
-    main: {
-      color: '#F27895',
-      contrastText: '#fff',
-    },
-  },
-  secondary: {
-    main: { 
-      color: '#FFA59A',
-      contrastText: '#fff',
-    },
-  },
-  tertiary: {
-    main: {
-      color: '#D5D5D5',
-      contrastText: '#030506',
-    },
-    light: {
-      color: '#FFF',
-      contrastText: '#030506',
-    },
-    },
+        light: {
+          color: '#FFFFFF',
+        },
+        main: {
+          color: '#181F22',
+        },
+      },
+      borders: {
+        main: {
+          color: '#181F22',
+        },
+      },
+      primary: {
+        main: {
+          color: '#F27895',
+          contrastText: '#fff',
+        },
+      },
+      secondary: {
+        main: {
+          color: '#FFA59A',
+          contrastText: '#fff',
+        },
+      },
+      tertiary: {
+        main: {
+          color: '#D5D5D5',
+          contrastText: '#030506',
+        },
+        light: {
+          color: '#FFF',
+          contrastText: '#030506',
+        },
+      },
     },
   },
 };
@@ -85,4 +85,4 @@ export default {
   transition: '200ms ease-in-out',
   fontFamily: '\'Rubik\', sans-serif',
   breakpoints,
-}; 
+};
