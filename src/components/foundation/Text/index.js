@@ -49,6 +49,7 @@ const TextBase = styled.span`
         cursor: pointer;
       `;
     }
+    return css``;
   }};
 `;
 
@@ -69,7 +70,7 @@ Text.defaultProps = {
 };
 
 Text.propTypes = {
-  tag: PropTypes.string.isRequired,
-  variant: PropTypes.string.isRequired,
+  tag: PropTypes.string,
+  variant: PropTypes.string,
   children: PropTypes.node,
 };
