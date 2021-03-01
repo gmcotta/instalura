@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { css, createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
@@ -34,7 +35,6 @@ const ModalWrapper = styled.div`
 `;
 
 const LockScroll = createGlobalStyle`
-  ${console.log('lockScroll')};
   body {
     overflow: hidden;
   }

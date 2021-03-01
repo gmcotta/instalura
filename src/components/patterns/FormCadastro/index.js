@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Lottie } from '@crello/react-lottie';
+import PropTypes from 'prop-types';
 
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
@@ -59,12 +60,10 @@ function FormContent({ onClose }) {
         setSubmissionStatus(formStates.ERROR);
         throw new Error('Erro inesperado');
       })
-      .then((resposta) => {
-        console.log(resposta);
+      .then(() => {
         setSubmissionStatus(formStates.DONE);
       })
-      .catch((erro) => {
-        console.error(erro);
+      .catch(() => {
         setSubmissionStatus(formStates.ERROR);
       })
       .finally(() => {
@@ -98,7 +97,8 @@ function FormContent({ onClose }) {
             color="tertiary.light"
             marginBottom="32px"
           >
-            Você está a um passo de saber tudoo que está rolando no bairro, complete seu cadastro agora!
+            Você está a um passo de saber tudoo que está rolando no bairro,
+            complete seu cadastro agora!
           </Text>
           <div>
             <TextField
@@ -257,3 +257,12 @@ export default function FormCadastro({ modalProps, onClose }) {
     </Grid.Row>
   );
 }
+
+FormContent.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
+
+FormCadastro.propTypes = {
+  modalProps: PropTypes.objectOf(PropTypes.object).isRequired,
+  onClose: PropTypes.func.isRequired,
+};
