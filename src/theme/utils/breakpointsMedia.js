@@ -6,10 +6,10 @@ const { breakpoints } = theme;
 export function breakpointsMedia(cssByBreakpoints) {
   const breakpointsNames = Object.keys(cssByBreakpoints);
   return breakpointsNames
-    .filter(breakpointName => Boolean(cssByBreakpoints[breakpointName]))
-    .map(breakpointName => css`
+    .filter((breakpointName) => Boolean(cssByBreakpoints[breakpointName]))
+    .map((breakpointName) => css`
       @media screen and (min-width: ${breakpoints[breakpointName]}px) {
         ${cssByBreakpoints[breakpointName]};
       }
     `);
-};
+}

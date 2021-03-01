@@ -24,20 +24,20 @@ export const TextStypeVariantsMap = {
       line-height: ${theme.typographyVariants.titleXS.lineHeight};
     `};
     ${breakpointsMedia({
-      md: css`
-        ${({theme}) => css`
+    md: css`
+        ${({ theme }) => css`
           font-size: ${theme.typographyVariants.title.fontSize};
           font-weight: ${theme.typographyVariants.title.fontWeight};
           line-height: ${theme.typographyVariants.title.lineHeight};
         `}
       `,
-    })}
+  })}
   `,
 };
 
 const TextBase = styled.span`
   ${({ variant }) => TextStypeVariantsMap[variant]};
-  color: ${(props) => get(props.theme, `colors.${props.color}.color`) };
+  color: ${(props) => get(props.theme, `colors.${props.color}.color`)};
   ${propToStyle('textAlign')};
   ${propToStyle('marginTop')};
   ${propToStyle('marginBottom')};
@@ -52,22 +52,24 @@ const TextBase = styled.span`
   }};
 `;
 
-export default function Text({ tag, variant, children, ...props }) {
+export default function Text({
+  tag, variant, children, ...props
+}) {
   return (
     <TextBase as={tag} variant={variant} {...props}>
       {children}
     </TextBase>
-  )
+  );
 }
 
 Text.defaultProps = {
   tag: 'span',
   variant: 'paragraph1',
   children: null,
-}
+};
 
 Text.propTypes = {
   tag: PropTypes.string.isRequired,
   variant: PropTypes.string.isRequired,
   children: PropTypes.node,
-}
+};

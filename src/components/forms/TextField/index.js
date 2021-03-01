@@ -19,11 +19,11 @@ export default function TextField({
   placeholder,
   name,
   onChange,
-  value
+  value,
 }) {
   return (
     <InputWrapper>
-      <Input 
+      <Input
         type="text"
         placeholder={placeholder}
         name={name}
@@ -31,12 +31,12 @@ export default function TextField({
         value={value}
       />
     </InputWrapper>
-  )
-};
+  );
+}
 
 Input.defaultProps = {
   tag: 'input',
-  variant: 'paragraph1'
+  variant: 'paragraph1',
 };
 
 TextField.propTypes = {

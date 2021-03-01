@@ -40,10 +40,10 @@ const LockScroll = createGlobalStyle`
   }
 `;
 
-export default function Modal({isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose, children }) {
   return (
-    <ModalWrapper 
-      isOpen={isOpen} 
+    <ModalWrapper
+      isOpen={isOpen}
       onClick={(event) => {
         const isSafeArea = event.target.closest('[data-modal-safe-area="true"]');
         if (!isSafeArea) {
@@ -58,8 +58,8 @@ export default function Modal({isOpen, onClose, children }) {
             x: 0,
           },
           closed: {
-            x: '100%'
-          }
+            x: '100%',
+          },
         }}
         transition={{
           duration: 0.2,
@@ -68,15 +68,19 @@ export default function Modal({isOpen, onClose, children }) {
         style={{
           display: 'flex',
           flex: 1,
-          position: 'relative'
+          position: 'relative',
         }}
       >
-        <Button ghost onClick={onClose} style={{
-          position: 'absolute',
-          top: '16px',
-          right: '16px',
-          padding: '0'
-        }}>
+        <Button
+          ghost
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            padding: '0',
+          }}
+        >
           <img src="/images/close.svg" alt="Fechar Modal" />
         </Button>
         {children({
@@ -84,11 +88,11 @@ export default function Modal({isOpen, onClose, children }) {
         })}
       </motion.div>
     </ModalWrapper>
-  )
+  );
 }
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.func.isRequired,
-}
+};

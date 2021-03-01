@@ -15,8 +15,8 @@ const formStates = {
   DEFAULT: 'DEFAULT',
   LOADING: 'LOADING',
   DONE: 'DONE',
-  ERROR: 'ERROR'
-}
+  ERROR: 'ERROR',
+};
 
 function FormContent({ onClose }) {
   const [userInfo, setUserInfo] = useState({
@@ -26,12 +26,12 @@ function FormContent({ onClose }) {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState(formStates.DEFAULT);
 
-  const isFormInvalid = !userInfo.nome.length || !userInfo.usuario.length; 
+  const isFormInvalid = !userInfo.nome.length || !userInfo.usuario.length;
 
   function handleChange(event) {
     return setUserInfo({
       ...userInfo,
-      [event.target.name]: event.target.value, 
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -52,33 +52,33 @@ function FormContent({ onClose }) {
       },
       body: JSON.stringify(userDTO),
     })
-    .then(resposta => {
-      if(resposta.ok) {
-        return resposta.json();
-      }
-      setSubmissionStatus(formStates.ERROR);
-      throw new Error('Erro inesperado');
-    })
-    .then(resposta => {
-      console.log(resposta);
-      setSubmissionStatus(formStates.DONE);
-    })
-    .catch(erro => {
-      console.error(erro);
-      setSubmissionStatus(formStates.ERROR);
-    })
-    .finally(() => {
-      setTimeout(() => {
-        onClose();
-        setSubmissionStatus(formStates.DEFAULT);
-        setIsFormSubmitted(false);
-        setUserInfo({
-          ...userInfo,
-          nome: '',
-          usuario: ''
-        });
-      }, 3000);
-    });
+      .then((resposta) => {
+        if (resposta.ok) {
+          return resposta.json();
+        }
+        setSubmissionStatus(formStates.ERROR);
+        throw new Error('Erro inesperado');
+      })
+      .then((resposta) => {
+        console.log(resposta);
+        setSubmissionStatus(formStates.DONE);
+      })
+      .catch((erro) => {
+        console.error(erro);
+        setSubmissionStatus(formStates.ERROR);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          onClose();
+          setSubmissionStatus(formStates.DEFAULT);
+          setIsFormSubmitted(false);
+          setUserInfo({
+            ...userInfo,
+            nome: '',
+            usuario: '',
+          });
+        }, 3000);
+      });
   }
 
   return (
@@ -101,27 +101,27 @@ function FormContent({ onClose }) {
             Você está a um passo de saber tudoo que está rolando no bairro, complete seu cadastro agora!
           </Text>
           <div>
-            <TextField 
-              placeholder="Nome" 
-              name="nome" 
-              value={userInfo.nome} 
+            <TextField
+              placeholder="Nome"
+              name="nome"
+              value={userInfo.nome}
               onChange={handleChange}
             />
           </div>
           <div>
-            <TextField 
-              placeholder="Usuário" 
+            <TextField
+              placeholder="Usuário"
               name="usuario"
-              value={userInfo.usuario} 
+              value={userInfo.usuario}
               onChange={handleChange}
             />
           </div>
-          <Button 
-            type="submit" 
-            disabled={isFormInvalid} 
+          <Button
+            type="submit"
+            disabled={isFormInvalid}
             variant="primary.main"
             fullWidth
-            >
+          >
             Cadastrar
           </Button>
         </>
@@ -135,13 +135,13 @@ function FormContent({ onClose }) {
           alignItems="center"
           flex={1}
         >
-          <Lottie 
+          <Lottie
             width="150px"
             height="150px"
-            config={{ 
-              animationData: loadingAnimation, 
-              loop: false, 
-              autoplay: true
+            config={{
+              animationData: loadingAnimation,
+              loop: false,
+              autoplay: true,
             }}
           />
         </Box>
@@ -154,13 +154,13 @@ function FormContent({ onClose }) {
           alignItems="center"
           flex={1}
         >
-          <Lottie 
+          <Lottie
             width="150px"
             height="150px"
-            config={{ 
-              animationData: successAnimation, 
-              loop: false, 
-              autoplay: true
+            config={{
+              animationData: successAnimation,
+              loop: false,
+              autoplay: true,
             }}
           />
           <Text
@@ -191,13 +191,13 @@ function FormContent({ onClose }) {
           alignItems="center"
           flex={1}
         >
-          <Lottie 
+          <Lottie
             width="150px"
             height="150px"
-            config={{ 
-              animationData: errorAnimation, 
-              loop: false, 
-              autoplay: true
+            config={{
+              animationData: errorAnimation,
+              loop: false,
+              autoplay: true,
             }}
           />
           <Text

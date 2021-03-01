@@ -9,8 +9,6 @@ import Box from '../src/components/foundation/layout/Box';
 import Grid from '../src/components/foundation/layout/Grid';
 import FormCadastro from '../src/components/patterns/FormCadastro';
 
-
-
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(true);
 

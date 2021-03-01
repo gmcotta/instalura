@@ -97,7 +97,7 @@ const Col = styled.div`
           max-width: 0 0 ${(100 * value.xl) / 12}%;
         `,
       }),
-    })
+    });
   }};
 
   ${({ offset }) => {
@@ -133,13 +133,13 @@ const Col = styled.div`
           margin-left: ${(100 * offset.xl) / 12}%;
         `,
       }),
-    })
+    });
   }};
 `;
 
 const Grid = {
   Container,
-  Row, 
+  Row,
   Col,
 };
 
