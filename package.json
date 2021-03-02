@@ -1,5 +1,5 @@
 {
-  "name": "with-styled-components",
+  "name": "instalura",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -37,8 +37,10 @@
   },
   "license": "MIT",
   "husky": {
-    "pre-push": "yarn lint",
-    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    "hooks": {
+      "pre-push": "yarn lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "config": {
     "commitizen": {
