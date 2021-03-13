@@ -79,6 +79,7 @@ export default function Home() {
       backgroundImage="url(/images/bubbles.svg)"
       backgroundRepeat="no-repeat"
       backgroundPosition="bottom right"
+      seoProps={{ headTitle: 'Home' }}
     >
       <PageContent />
     </WebsitePageWrapper>

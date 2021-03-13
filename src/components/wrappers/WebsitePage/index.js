@@ -6,13 +6,14 @@ import Menu from '../../commons/Menu';
 import Modal from '../../commons/Modal';
 import Box from '../../foundation/layout/Box';
 import FormCadastro from '../../patterns/FormCadastro';
+import SEO from '../../commons/SEO';
 
 export const WebsitePageContext = createContext({
   openModalCadastrar: () => {},
   closeModalCadastrar: () => {},
 });
 
-export default function WebsitePageWrapper({ children }) {
+export default function WebsitePageWrapper({ children, seoProps }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function openModal() {
@@ -29,6 +30,7 @@ export default function WebsitePageWrapper({ children }) {
       closeModalCadastrar: () => { closeModal(); },
     }}
     >
+      <SEO {...seoProps} />
       <Box
         display="flex"
         flex="1"
