@@ -36,7 +36,7 @@ export default function Home() {
           <FormCadastro modalProps={modalProps} onClose={closeModal} />
         )}
       </Modal>
-      <Menu />
+      <Menu onCadastrarClick={openModal} />
 
       <Grid.Container
         marginTop={{
