@@ -13,7 +13,9 @@ export const WebsitePageContext = createContext({
   closeModalCadastrar: () => {},
 });
 
-export default function WebsitePageWrapper({ children, seoProps }) {
+export default function WebsitePageWrapper({
+  children, seoProps, pageBoxProps, menuProps,
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function openModal() {
@@ -35,13 +37,14 @@ export default function WebsitePageWrapper({ children, seoProps }) {
         display="flex"
         flex="1"
         flexDirection="column"
+        {...pageBoxProps}
       >
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {(modalProps) => (
             <FormCadastro modalProps={modalProps} onClose={closeModal} />
           )}
         </Modal>
-        <Menu onCadastrarClick={openModal} />
+        {menuProps.showMenu && <Menu onCadastrarClick={openModal} />}
         {children}
         <Footer />
       </Box>
@@ -49,6 +52,27 @@ export default function WebsitePageWrapper({ children, seoProps }) {
   );
 }
 
+WebsitePageWrapper.defaultProps = {
+  seoProps: {},
+  pageBoxProps: {},
+  menuProps: {
+    showMenu: true,
+  },
+};
+
 WebsitePageWrapper.propTypes = {
+  seoProps: PropTypes.shape({
+    headTitle: PropTypes.string,
+  }),
+  menuProps: PropTypes.shape({
+    showMenu: PropTypes.bool,
+  }),
+  pageBoxProps: PropTypes.shape({
+    backgroundImage: PropTypes.string,
+    backgroundRepeat: PropTypes.string,
+    backgroundPosition: PropTypes.string,
+    flexWrap: PropTypes.string,
+    justifyContent: PropTypes.string,
+  }),
   children: PropTypes.node.isRequired,
 };

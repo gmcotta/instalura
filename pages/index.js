@@ -74,12 +74,17 @@ function PageContent() {
 export default function Home() {
   return (
     <WebsitePageWrapper
-      flexWrap="wrap"
-      justifyContent="space-between"
-      backgroundImage="url(/images/bubbles.svg)"
-      backgroundRepeat="no-repeat"
-      backgroundPosition="bottom right"
+      pageBoxProps={{
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        backgroundImage: 'url(/images/bubbles.svg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'bottom right',
+      }}
       seoProps={{ headTitle: 'Home' }}
+      menuProps={{
+        showMenu: true,
+      }}
     >
       <PageContent />
     </WebsitePageWrapper>
