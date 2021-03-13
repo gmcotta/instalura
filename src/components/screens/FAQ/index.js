@@ -1,68 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '../../foundation/layout/Box';
-import Modal from '../../commons/Modal';
-import FormCadastro from '../../patterns/FormCadastro';
-import Menu from '../../commons/Menu';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
-import Footer from '../../commons/Footer';
 
 export default function FAQScreen({ faqCategories }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  function openModal() {
-    setIsModalOpen(true);
-  }
-
-  function closeModal() {
-    setIsModalOpen(false);
-  }
-
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      flex="1"
-    >
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
+    <Grid.Container style={{ flex: 1 }}>
+      <Grid.Row
+        marginTop={{ xs: '32px', md: '100px' }}
+        marginBottom={{ xs: '32px', md: '100px' }}
+        justifyContent="center"
       >
-        {(modalProps) => (
-          <FormCadastro modalProps={modalProps} onClose={closeModal} />
-        )}
-      </Modal>
-
-      <Menu onCadastrarClick={openModal} />
-
-      <Grid.Container style={{ flex: 1 }}>
-        <Grid.Row
-          marginTop={{ xs: '32px', md: '100px' }}
-          marginBottom={{ xs: '32px', md: '100px' }}
-          justifyContent="center"
+        <Grid.Col
+          value={{ xs: 12, md: 12 }}
+          flex={1}
         >
-          <Grid.Col
-            value={{ xs: 12, md: 12 }}
-            flex={1}
+          <Text
+            variant="title"
+            tag="h2"
+            color="tertiary.main"
+            textAlign="center"
           >
-            <Text
-              variant="title"
-              tag="h2"
-              color="tertiary.main"
-              textAlign="center"
-            >
-              Como podemos te ajudar?
-            </Text>
-          </Grid.Col>
-        </Grid.Row>
-        <Grid.Row
-          alignItems="flex-start"
-          justifyContent="center"
-          flex="1"
-        >
-          {
+            Como podemos te ajudar?
+          </Text>
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row
+        alignItems="flex-start"
+        justifyContent="center"
+        flex="1"
+      >
+        {
             faqCategories && faqCategories.map((category) => (
               <Grid.Col
                 value={{ xs: 12, md: 3 }}
@@ -97,11 +67,8 @@ export default function FAQScreen({ faqCategories }) {
               </Grid.Col>
             ))
           }
-        </Grid.Row>
-      </Grid.Container>
-
-      <Footer />
-    </Box>
+      </Grid.Row>
+    </Grid.Container>
   );
 }
 
