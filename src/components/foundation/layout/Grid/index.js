@@ -36,11 +36,13 @@ const Row = styled.div`
   margin-right: -16px;
   margin-left: -16px;
 
-  ${propToStyle('flex')};
-  ${propToStyle('marginLeft')};
-  ${propToStyle('marginRight')};
-  ${propToStyle('justifyContent')};
-
+   ${propToStyle('flex')}
+    ${propToStyle('marginTop')}
+    ${propToStyle('marginLeft')}
+    ${propToStyle('marginRight')}
+    ${propToStyle('justifyContent')}
+    ${propToStyle('marginBottom')}
+    ${propToStyle('flexDirection')}
 `;
 
 const Col = styled.div`
@@ -56,6 +58,7 @@ const Col = styled.div`
   ${propToStyle('justifyContent')};
   ${propToStyle('paddingLeft')};
   ${propToStyle('paddingRight')};
+  ${propToStyle('order')};
 
   ${({ value }) => {
     if (typeof value === 'number') {
