@@ -3,7 +3,8 @@ import React, { useContext } from 'react';
 import Button from '../src/components/commons/Button';
 import Text from '../src/components/foundation/Text';
 import Grid from '../src/components/foundation/layout/Grid';
-import WebsitePageWrapper, { WebsitePageContext } from '../src/components/wrappers/WebsitePage';
+import { WebsitePageContext } from '../src/components/wrappers/WebsitePage';
+import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
 function PageContent() {
   const websitePageContext = useContext(WebsitePageContext);
@@ -71,22 +72,18 @@ function PageContent() {
   );
 }
 
-export default function Home() {
-  return (
-    <WebsitePageWrapper
-      pageBoxProps={{
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        backgroundImage: 'url(/images/bubbles.svg)',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'bottom right',
-      }}
-      seoProps={{ headTitle: 'Home' }}
-      menuProps={{
-        showMenu: true,
-      }}
-    >
-      <PageContent />
-    </WebsitePageWrapper>
-  );
-}
+export default websitePageHOC(PageContent, {
+  pageWrapperProps: {
+    pageBoxProps: {
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      backgroundImage: 'url(/images/bubbles.svg)',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'bottom right',
+    },
+    seoProps: { headTitle: 'Home' },
+    menuProps: {
+      showMenu: true,
+    },
+  },
+});
