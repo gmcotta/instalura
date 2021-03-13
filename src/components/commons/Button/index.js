@@ -1,9 +1,12 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import PropTypes from 'prop-types';
 
 import { TextStypeVariantsMap } from '../../foundation/Text';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import propToStyle from '../../../theme/utils/propToStyle';
+import Link from '../Link';
 
 const GhostButton = css`
   background-color: transparent;
@@ -15,7 +18,7 @@ const DefaultButton = css`
   color: ${({ theme, variant }) => get(theme, `colors.${variant}.contrastText`)};
 `;
 
-const Button = styled.button`
+const ButtonWrapper = styled.button`
   border: 0;
   cursor: pointer;
   padding: 12px 26px;
@@ -54,4 +57,18 @@ const Button = styled.button`
   `};
 `;
 
-export default Button;
+export default function Button({ href, ...props }) {
+  const hasHref = Boolean(href);
+  const componentTag = hasHref ? Link : 'button';
+  return (
+    <ButtonWrapper as={componentTag} href={href} {...props} />
+  );
+}
+
+Button.defaultProps = {
+  href: '',
+};
+
+Button.propTypes = {
+  href: PropTypes.string,
+};
