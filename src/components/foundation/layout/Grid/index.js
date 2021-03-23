@@ -11,6 +11,9 @@ const Container = styled.div`
   max-width: initial;
 
   ${propToStyle('marginTop')};
+  ${propToStyle('display')};
+  ${propToStyle('flex')};
+  ${propToStyle('alignItems')};
 
   ${breakpointsMedia({
     sm: css`
@@ -36,13 +39,13 @@ const Row = styled.div`
   margin-right: -16px;
   margin-left: -16px;
 
-   ${propToStyle('flex')}
-    ${propToStyle('marginTop')}
-    ${propToStyle('marginLeft')}
-    ${propToStyle('marginRight')}
-    ${propToStyle('justifyContent')}
-    ${propToStyle('marginBottom')}
-    ${propToStyle('flexDirection')}
+  ${propToStyle('flex')}
+  ${propToStyle('marginTop')}
+  ${propToStyle('marginLeft')}
+  ${propToStyle('marginRight')}
+  ${propToStyle('justifyContent')}
+  ${propToStyle('marginBottom')}
+  ${propToStyle('flexDirection')}
 `;
 
 const Col = styled.div`
