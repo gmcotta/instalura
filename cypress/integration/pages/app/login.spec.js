@@ -1,31 +1,40 @@
 /// <reference types="cypress" />
+import LoginScreenPageObject from '../../../../src/components/screens/Login/login.pageObject';
 
-describe('/pages/app/login', () => {
-  it('should go to /app/profile', () => {
-    cy.visit('/app/login/');
+describe('Login Page', () => {
+  describe('when fill and submit login form request', () => {
+    it('should go to /app/profile', () => {
+      // Arrange
+      const loginScreen = new LoginScreenPageObject(cy);
+      cy.visit('/app/login/');
 
-    cy.get('#formCadastro input[name="username"]').type('omariosouto');
-    cy.get('#formCadastro input[name="password"]').type('senhasegura');
-    cy.get('#formCadastro button[type="submit"]').click();
+      // Act
+      loginScreen.fillLoginForm({ user: 'omariosouto', password: 'senhasegura' });
+      loginScreen.submitLoginForm();
 
-    cy.url().should('include', '/app/profile');
-  });
+      // Assert
+      cy.url().should('include', '/app/profile');
+    });
 
-  it('should store jwt token', () => {
-    cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')
-      .as('userLogin');
-    cy.visit('/app/login/');
+    it('should store jwt token', () => {
+      // Arrange
+      const loginScreen = new LoginScreenPageObject(cy);
+      cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')
+        .as('userLogin');
+      cy.visit('/app/login/');
 
-    cy.get('#formCadastro input[name="username"]').type('omariosouto');
-    cy.get('#formCadastro input[name="password"]').type('senhasegura');
-    cy.get('#formCadastro button[type="submit"]').click();
+      // Act
+      loginScreen.fillLoginForm({ user: 'omariosouto', password: 'senhasegura' });
+      loginScreen.submitLoginForm();
 
-    cy.wait('@userToken').then((intercept) => {
-      const { token } = intercept.response.body.data;
+      cy.wait('@userLogin').then((intercept) => {
+        const { token } = intercept.response.body.data;
 
-      cy.getCookie('APP_TOKEN')
-        .should('exist')
-        .should('have.property', 'value', token);
+        // Assert
+        cy.getCookie('APP_TOKEN')
+          .should('exist')
+          .should('have.property', 'value', token);
+      });
     });
   });
 });
