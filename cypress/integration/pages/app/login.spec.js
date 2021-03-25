@@ -12,7 +12,7 @@ describe('/pages/app/login', () => {
   });
 
   it('should store jwt token', () => {
-    cy.intercept('https://instalura-api.omariosouto.vercel.app/api/login')
+    cy.intercept('https://instalura-api-git-master-omariosouto.vercel.app/api/login')
       .as('userLogin');
     cy.visit('/app/login/');
 

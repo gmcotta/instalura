@@ -20,7 +20,7 @@ async function HttpClient(url, { headers, body, ...options }) {
 
 const loginService = {
   async login({ username, password }) {
-    return HttpClient('https://instalura-api.omariosouto.vercel.app/api/login', {
+    return HttpClient('https://instalura-api-git-master-omariosouto.vercel.app/api/login', {
       method: 'POST',
       body: {
         username,
