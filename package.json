@@ -9,7 +9,9 @@
     "custom-script": "node ./script-test.js",
     "commit": "cz",
     "test:e2e:open": "cypress open",
-    "test:e2e": "cypress run --headless"
+    "test:e2e": "cypress run --headless",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@crello/react-lottie": "^0.0.11",
