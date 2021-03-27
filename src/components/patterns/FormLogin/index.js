@@ -45,16 +45,20 @@ export default function LoginForm() {
         placeholder="Usuário"
         name="username"
         value={form.values.username}
-        onChange={form.handleChange}
         error={form.errors.username}
+        isTouched={form.touched.username}
+        onChange={form.handleChange}
+        onBlur={form.handleBlur}
       />
       <TextField
         placeholder="Senha"
         name="password"
         type="password"
         value={form.values.password}
-        onChange={form.handleChange}
         error={form.errors.password}
+        isTouched={form.touched.password}
+        onChange={form.handleChange}
+        onBlur={form.handleBlur}
       />
 
       <Button
@@ -65,6 +69,7 @@ export default function LoginForm() {
           md: 'initial',
         }}
         fullWidth
+        disabled={form.isFormDisabled}
       >
         Entrar
       </Button>
