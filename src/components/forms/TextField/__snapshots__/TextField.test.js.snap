@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextField /> should render component 1`] = `
+Array [
+  <input
+    class="Text__TextBase-sc-15ljoty-0 iUoRtl TextField__Input-kms3jq-1 kYVlIy"
+    name="username"
+    placeholder="Nome"
+    type="text"
+    value="Gustavo"
+  />,
+]
+`;
