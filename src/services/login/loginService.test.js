@@ -1,19 +1,30 @@
 import loginService from './loginService';
 
+const token = 'fake-token';
+
+const setCookie = jest.fn();
+
+async function HttpClient() {
+  return {
+    data: {
+      token,
+    },
+  };
+}
+
+async function HttpClientError() {
+  return {
+    data: {},
+    err: {
+      message: 'Failed to login',
+    },
+  };
+}
+
 describe('loginService', () => {
   describe('login()', () => {
-    describe('when user try to login', () => {
+    describe('when user try to login successfully', () => {
       it('should store its token', async () => {
-        const token = 'fake-token';
-        const setCookie = jest.fn();
-        async function HttpClient() {
-          return {
-            data: {
-              token,
-            },
-          };
-        }
-
         const loginServiceResponse = await loginService.login(
           {
             username: 'username',
@@ -33,6 +44,19 @@ describe('loginService', () => {
           },
         );
         expect(loginServiceResponse).toEqual({ token });
+      });
+    });
+
+    describe('when user try to login and fails', () => {
+      it('should throw an error', async () => {
+        await expect(loginService.login(
+          {
+            username: 'username',
+            password: 'password',
+          },
+          setCookie,
+          HttpClientError,
+        )).rejects.toThrow('Failed to login');
       });
     });
   });

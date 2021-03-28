@@ -38,7 +38,12 @@ const loginService = {
     })
       .then((jsonResponse) => {
         const { token } = jsonResponse.data;
+        const hasToken = !!token;
         const DAY_IN_SECONDS = 86400;
+
+        if (!hasToken) {
+          throw new Error('Failed to login');
+        }
 
         setCookieModule(null, 'APP_TOKEN', token, {
           path: '/',
