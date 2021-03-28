@@ -44,8 +44,8 @@ const loginService = {
         return { token };
       });
   },
-  logout() {
-    destroyCookie(null, 'APP_TOKEN');
+  async logout(destroyCookieModule = destroyCookie) {
+    destroyCookieModule(null, 'APP_TOKEN');
   },
 };
 
