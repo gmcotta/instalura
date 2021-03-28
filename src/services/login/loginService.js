@@ -24,8 +24,12 @@ const BASE_URL = isStagingEnv
   : 'https://instalura-api.omariosouto.vercel.app';
 
 const loginService = {
-  async login({ username, password }) {
-    return HttpClient(`${BASE_URL}/api/login`, {
+  async login(
+    { username, password },
+    setCookieModule = setCookie,
+    HttpClientModule = HttpClient,
+  ) {
+    return HttpClientModule(`${BASE_URL}/api/login`, {
       method: 'POST',
       body: {
         username,
@@ -36,7 +40,7 @@ const loginService = {
         const { token } = jsonResponse.data;
         const DAY_IN_SECONDS = 86400;
 
-        setCookie(null, 'APP_TOKEN', token, {
+        setCookieModule(null, 'APP_TOKEN', token, {
           path: '/',
           maxAge: DAY_IN_SECONDS * 7,
         });
