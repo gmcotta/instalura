@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import * as yup from 'yup';
+import PropTypes from 'prop-types';
 
 import TextField from '../../forms/TextField';
 import Button from '../../commons/Button';
@@ -16,7 +17,7 @@ const loginSchema = yup.object().shape({
     .min(8, 'Preencha pelo menos 8 caracteres'),
 });
 
-export default function LoginForm() {
+export default function LoginForm({ onSubmit }) {
   const router = useRouter();
   const initialValues = {
     username: '',
@@ -25,12 +26,19 @@ export default function LoginForm() {
   const form = useForm({
     initialValues,
     onSubmit: (values) => {
+      form.setIsFormDisabled(true);
       loginService.login({
         username: values.username,
         password: values.password,
       })
         .then(() => {
           router.push('/app/profile');
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          form.setIsFormDisabled(false);
         });
     },
     async validateSchema(values) {
@@ -40,7 +48,7 @@ export default function LoginForm() {
     },
   });
   return (
-    <form id="formCadastro" onSubmit={form.handleSubmit}>
+    <form id="formCadastro" onSubmit={onSubmit || form.handleSubmit}>
       <TextField
         placeholder="Usuário"
         name="username"
@@ -76,3 +84,11 @@ export default function LoginForm() {
     </form>
   );
 }
+
+LoginForm.defaultProps = {
+  onSubmit: undefined,
+};
+
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func,
+};
