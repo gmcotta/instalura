@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
 
-function AboutScreen() {
+function AboutScreen({ messages }) {
   return (
     <Box
       display="flex"
@@ -25,7 +27,7 @@ function AboutScreen() {
               tag="h2"
               color="tertiary.main"
             >
-              Sobre
+              {messages.aboutPage.title}
             </Text>
           </Grid.Col>
           <Grid.Col
@@ -33,13 +35,11 @@ function AboutScreen() {
             offset={{ md: 2 }}
             flex={1}
           >
-            <Text
-              variant="title"
-              tag="h2"
-              color="tertiary.main"
-            >
-              Texto
-            </Text>
+            <Box
+              dangerouslySetInnerHTML={{
+                __html: messages.aboutPage.content,
+              }}
+            />
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>
@@ -48,3 +48,8 @@ function AboutScreen() {
 }
 
 export default AboutScreen;
+
+AboutScreen.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  messages: PropTypes.object.isRequired,
+};
