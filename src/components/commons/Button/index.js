@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
 
-import { TextStypeVariantsMap } from '../../foundation/Text';
+import { TextStyleVariantsMap } from '../../foundation/Text';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import propToStyle from '../../../theme/utils/propToStyle';
 import Link from '../Link';
@@ -28,7 +28,7 @@ const ButtonWrapper = styled.button`
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: ${({ theme }) => theme.transition};
   ${({ ghost }) => (ghost ? GhostButton : DefaultButton)};
-  ${TextStypeVariantsMap.smallestException};
+  ${TextStyleVariantsMap.smallestException};
   
   &:hover,
   &:focus {
@@ -40,10 +40,10 @@ const ButtonWrapper = styled.button`
 
   ${breakpointsMedia({
     xs: css`
-      ${TextStypeVariantsMap.smallestException}
+      ${TextStyleVariantsMap.smallestException}
     `,
     md: css`
-      ${TextStypeVariantsMap.paragraph1}
+      ${TextStyleVariantsMap.paragraph1}
     `,
   })}
 

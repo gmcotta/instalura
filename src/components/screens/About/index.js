@@ -28,9 +28,8 @@ function AboutScreen({ messages }) {
               variant="title"
               tag="h2"
               color="tertiary.main"
-            >
-              {messages.aboutPage.title}
-            </Text>
+              cmsKey="aboutPage.title"
+            />
           </Grid.Col>
           <Grid.Col
             value={{ xs: 12, md: 6, lg: 6 }}

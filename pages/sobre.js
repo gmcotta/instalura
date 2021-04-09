@@ -2,8 +2,6 @@ import AboutScreen, { getContent } from '../src/components/screens/About';
 import websitePageHOC from '../src/components/wrappers/WebsitePage/hoc';
 
 export async function getStaticProps({ preview }) {
-  console.log('preview', preview);
-
   const messages = await getContent({ preview });
 
   return {
