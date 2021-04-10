@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Button from '../../commons/Button';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
-import { WebsitePageContext } from '../../wrappers/WebsitePage';
+import { WebsitePageContext } from '../../wrappers/WebsitePage/context';
 
 export default function HomeScreen() {
   const websitePageContext = useContext(WebsitePageContext);
