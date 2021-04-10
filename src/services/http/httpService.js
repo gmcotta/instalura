@@ -1,5 +1,4 @@
 export default async function HttpClient(url, { headers, body, ...options }) {
-  console.log(url);
   return fetch(url, {
     headers: {
       ...headers,

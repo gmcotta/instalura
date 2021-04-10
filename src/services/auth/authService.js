@@ -9,6 +9,9 @@ export default function authService(ctx) {
   const token = cookies[LOGIN_COOKIE_APP_TOKEN];
 
   return {
+    async getToken() {
+      return token;
+    },
     async hasActiveSession() {
       return HttpClient(`${BASE_URL}/api/auth`, {
         method: 'POST',

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import authService from '../../src/services/auth/authService';
+import userService from '../../src/services/user/userService';
 
 export async function getServerSideProps(ctx) {
   const auth = authService(ctx);
@@ -9,9 +10,14 @@ export async function getServerSideProps(ctx) {
 
   if (hasActionSession) {
     const { user } = auth.getSession();
+    const profilePage = await userService().getProfilePage(ctx);
     return {
       props: {
-        user,
+        user: {
+          ...user,
+          ...profilePage.user,
+        },
+        posts: profilePage.posts,
       },
     };
   }
@@ -20,11 +26,11 @@ export async function getServerSideProps(ctx) {
   return ctx.res.end();
 }
 
-export default function ProfilePage({ user }) {
+export default function ProfilePage(props) {
   return (
     <div>
       Página de Profile!
-      <pre>{JSON.stringify(user, null, 2)}</pre>
+      <pre>{JSON.stringify(props, null, 2)}</pre>
       <img
         src="https://media.giphy.com/media/bn0zlGb4LOyo8/giphy.gif"
         alt="Nicolas Cage"
