@@ -1,7 +1,7 @@
 import { parseCookies } from 'nookies';
 import jwt from 'jsonwebtoken';
 
-import { BASE_URL, LOGIN_COOKIE_APP_TOKEN } from '../login/loginService';
+import loginService, { BASE_URL, LOGIN_COOKIE_APP_TOKEN } from '../login/loginService';
 import HttpClient from '../http/httpService';
 
 export default function authService(ctx) {
@@ -16,8 +16,17 @@ export default function authService(ctx) {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then(({ data }) => !!data.authenticated)
-        .catch(() => false);
+        .then(({ data }) => {
+          if (data.authenticated) {
+            return true;
+          }
+          loginService.logout(ctx);
+          return false;
+        })
+        .catch(() => {
+          loginService.logout(ctx);
+          return false;
+        });
     },
     getSession() {
       const session = jwt.decode(token);
