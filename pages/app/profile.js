@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import authService from '../../src/services/auth/authService';
 
 export async function getServerSideProps(ctx) {
-  const hasActionSession = false;
+  const auth = authService(ctx);
+
+  const hasActionSession = await auth.hasActiveSession();
 
   if (hasActionSession) {
+    const { user } = auth.getSession();
     return {
       props: {
-        user: {
-          name: 'Gustavo',
-        },
+        user,
       },
     };
   }
@@ -32,5 +34,6 @@ export default function ProfilePage({ user }) {
 }
 
 ProfilePage.propTypes = {
-  user: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  user: PropTypes.object.isRequired,
 };
