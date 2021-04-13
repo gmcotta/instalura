@@ -59,6 +59,8 @@ jobs:
   integration_tests:
     name: Integration Tests
     runs-on: ubuntu-latest
+    env:
+      DATOCMS_TOKEN=6c5c8812734f7d7a051feebdbd5ef2
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
