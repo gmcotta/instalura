@@ -30,7 +30,7 @@ export default function useForm({ initialValues, onSubmit, validateSchema }) {
   }
 
   useEffect(() => {
-    validateValues(values).catch((err) => { console.error(err); });
+    validateValues(values).catch(() => { });
   }, [values]);
 
   return {

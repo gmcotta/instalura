@@ -23,7 +23,6 @@ export default function userService() {
           posts: response.data,
         };
       } catch (err) {
-        console.error(err);
         throw new Error('Falha em pegar os dados do servidor :(');
       }
     },

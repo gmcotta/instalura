@@ -34,8 +34,7 @@ export default function LoginForm({ onSubmit }) {
         .then(() => {
           router.push('/app/profile');
         })
-        .catch((err) => {
-          console.error(err);
+        .catch(() => {
         })
         .finally(() => {
           form.setIsFormDisabled(false);

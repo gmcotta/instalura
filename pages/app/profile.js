@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import authService from '../../src/services/auth/authService';
 import userService from '../../src/services/user/userService';
 
@@ -38,8 +38,3 @@ export default function ProfilePage(props) {
     </div>
   );
 }
-
-ProfilePage.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  user: PropTypes.object.isRequired,
-};
