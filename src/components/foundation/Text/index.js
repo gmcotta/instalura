@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
@@ -6,8 +6,9 @@ import get from 'lodash/get';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import propToStyle from '../../../theme/utils/propToStyle';
 import Link from '../../commons/Link';
+import { WebsitePageContext } from '../../wrappers/WebsitePage/context';
 
-export const TextStypeVariantsMap = {
+export const TextStyleVariantsMap = {
   smallestException: css`
     font-size: ${({ theme }) => theme.typographyVariants.smallestException.fontSize};
     font-weight: ${({ theme }) => theme.typographyVariants.smallestException.fontWeight};
@@ -37,7 +38,7 @@ export const TextStypeVariantsMap = {
 };
 
 const TextBase = styled.span`
-  ${({ variant }) => TextStypeVariantsMap[variant]};
+  ${({ variant }) => TextStyleVariantsMap[variant]};
   color: ${(props) => get(props.theme, `colors.${props.color}.color`)};
   ${propToStyle('textAlign')};
   ${propToStyle('marginTop')};
@@ -55,19 +56,24 @@ const TextBase = styled.span`
 `;
 
 export default function Text({
-  tag, variant, children, href, ...props
+  tag, variant, children, href, cmsKey, ...props
 }) {
+  const websitePageContext = useContext(WebsitePageContext);
+  const componentContent = cmsKey
+    ? websitePageContext.getCMSContent(cmsKey)
+    : children;
+
   const hasHref = Boolean(href);
   if (hasHref) {
     return (
       <TextBase as={Link} variant={variant} href={href} {...props}>
-        {children}
+        {componentContent}
       </TextBase>
     );
   }
   return (
     <TextBase as={tag} variant={variant} {...props}>
-      {children}
+      {componentContent}
     </TextBase>
   );
 }
@@ -77,6 +83,7 @@ Text.defaultProps = {
   variant: 'paragraph1',
   children: null,
   href: '',
+  cmsKey: '',
 };
 
 Text.propTypes = {
@@ -84,4 +91,5 @@ Text.propTypes = {
   variant: PropTypes.string,
   children: PropTypes.node,
   href: PropTypes.string,
+  cmsKey: PropTypes.string,
 };
