@@ -9,6 +9,7 @@ import Box from '../../foundation/layout/Box';
 import FormCadastro from '../../patterns/FormCadastro';
 import SEO from '../../commons/SEO';
 import { WebsitePageContext } from './context';
+import LoggedHeader from '../../commons/LoggedHeader';
 
 export default function WebsitePageWrapper({
   children, seoProps, pageBoxProps, menuProps, messages,
@@ -43,6 +44,7 @@ export default function WebsitePageWrapper({
           )}
         </Modal>
         {menuProps.showMenu && <Menu onCadastrarClick={openModal} />}
+        {menuProps.showLoggedMenu && <LoggedHeader />}
         {children}
         <Footer />
       </Box>
@@ -55,6 +57,7 @@ WebsitePageWrapper.defaultProps = {
   pageBoxProps: {},
   menuProps: {
     showMenu: true,
+    showLoggedMenu: false,
   },
   messages: {},
 };
@@ -65,6 +68,7 @@ WebsitePageWrapper.propTypes = {
   }),
   menuProps: PropTypes.shape({
     showMenu: PropTypes.bool,
+    showLoggedMenu: PropTypes.bool,
   }),
   pageBoxProps: PropTypes.shape({
     backgroundImage: PropTypes.string,
