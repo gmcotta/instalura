@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Text from '../../foundation/Text';
+import propToStyle from '../../../theme/utils/propToStyle';
 
 const InputWrapper = styled.div`
-  margin-bottom: 17px;
+  ${propToStyle('marginBottom')};
 `;
 
 const Input = styled(Text)`

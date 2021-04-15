@@ -106,6 +106,7 @@ function FormContent({ onClose }) {
               name="nome"
               value={userInfo.nome}
               onChange={handleChange}
+              marginBottom="17px"
             />
           </div>
           <div>
@@ -114,6 +115,7 @@ function FormContent({ onClose }) {
               name="usuario"
               value={userInfo.usuario}
               onChange={handleChange}
+              marginBottom="17px"
             />
           </div>
           <Button

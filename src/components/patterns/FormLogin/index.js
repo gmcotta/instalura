@@ -56,6 +56,7 @@ export default function LoginForm({ onSubmit }) {
         isTouched={form.touched.username}
         onChange={form.handleChange}
         onBlur={form.handleBlur}
+        marginBottom="17px"
       />
       <TextField
         placeholder="Senha"
@@ -66,6 +67,7 @@ export default function LoginForm({ onSubmit }) {
         isTouched={form.touched.password}
         onChange={form.handleChange}
         onBlur={form.handleBlur}
+        marginBottom="17px"
       />
 
       <Button
