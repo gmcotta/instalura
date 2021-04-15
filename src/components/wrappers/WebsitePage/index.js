@@ -12,7 +12,7 @@ import { WebsitePageContext } from './context';
 import LoggedHeader from '../../commons/LoggedHeader';
 
 export default function WebsitePageWrapper({
-  children, seoProps, pageBoxProps, menuProps, messages,
+  children, seoProps, pageBoxProps, menuProps, footerProps, messages,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -46,7 +46,7 @@ export default function WebsitePageWrapper({
         {menuProps.showMenu && <Menu onCadastrarClick={openModal} />}
         {menuProps.showLoggedMenu && <LoggedHeader />}
         {children}
-        <Footer />
+        {footerProps.showFooter && <Footer />}
       </Box>
     </WebsitePageContext.Provider>
   );
@@ -58,6 +58,9 @@ WebsitePageWrapper.defaultProps = {
   menuProps: {
     showMenu: true,
     showLoggedMenu: false,
+  },
+  footerProps: {
+    showFooter: true,
   },
   messages: {},
 };
@@ -76,6 +79,9 @@ WebsitePageWrapper.propTypes = {
     backgroundPosition: PropTypes.string,
     flexWrap: PropTypes.string,
     justifyContent: PropTypes.string,
+  }),
+  footerProps: PropTypes.shape({
+    showFooter: PropTypes.bool,
   }),
   children: PropTypes.node.isRequired,
   // eslint-disable-next-line react/forbid-prop-types

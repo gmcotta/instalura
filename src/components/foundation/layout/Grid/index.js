@@ -59,9 +59,12 @@ const Col = styled.div`
   ${propToStyle('flexDirection')};
   ${propToStyle('alignItems')};
   ${propToStyle('justifyContent')};
+  ${propToStyle('justifyItems')};
   ${propToStyle('paddingLeft')};
   ${propToStyle('paddingRight')};
   ${propToStyle('order')};
+  ${propToStyle('gridTemplateColumns')}
+  ${propToStyle('gap')}
 
   ${({ value }) => {
     if (typeof value === 'number') {
