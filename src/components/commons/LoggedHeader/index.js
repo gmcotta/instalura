@@ -143,7 +143,7 @@ export default function LoggedHeader() {
     <HeaderWrapper>
       <HeaderWrapper.Content>
         <HeaderWrapper.LeftSide>
-          <Logo />
+          <Logo size="medium" />
         </HeaderWrapper.LeftSide>
         <HeaderWrapper.RightSide>
           <SearchArea>
