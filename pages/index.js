@@ -13,7 +13,6 @@ export default websitePageHOC(HomeScreen, {
     seoProps: { headTitle: 'Home' },
     menuProps: {
       showMenu: true,
-      showLoggedMenu: true,
     },
   },
 });
