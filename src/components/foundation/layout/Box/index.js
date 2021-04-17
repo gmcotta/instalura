@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import get from 'lodash/get';
+
 import propToStyle from '../../../../theme/utils/propToStyle';
 
 const Box = styled.div`
@@ -21,6 +23,12 @@ const Box = styled.div`
   ${propToStyle('marginTop')}
   ${propToStyle('marginBottom')}
   ${propToStyle('marginRight')}
+  ${({ theme, backgroundColorTheme }) => {
+    const color = get(theme, `colors.${backgroundColorTheme}.color`);
+    return css`
+      background-color: ${color};
+    `;
+  }}
   ${({ theme, borderRadiusTheme }) => borderRadiusTheme && `border-radius: ${theme.borderRadius}`};
 `;
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import ProfileScreen from '../../src/components/screens/Profile';
 import websitePageHOC from '../../src/components/wrappers/WebsitePage/hoc';
 
@@ -32,6 +31,7 @@ export default websitePageHOC(ProfileScreen, {
   pageWrapperProps: {
     pageBoxProps: {
       flexWrap: 'wrap',
+      backgroundColorTheme: 'background.main',
     },
     seoProps: { headTitle: 'Perfil' },
     menuProps: {

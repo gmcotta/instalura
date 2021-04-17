@@ -77,6 +77,7 @@ WebsitePageWrapper.propTypes = {
     backgroundImage: PropTypes.string,
     backgroundRepeat: PropTypes.string,
     backgroundPosition: PropTypes.string,
+    backgroundColor: PropTypes.string,
     flexWrap: PropTypes.string,
     justifyContent: PropTypes.string,
   }),
