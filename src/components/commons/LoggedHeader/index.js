@@ -10,10 +10,7 @@ import Heart from '../../../theme/icons/heart';
 import Search from '../../../theme/icons/search';
 
 const HeaderWrapper = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  background-color: #FFF;
   margin-top: 18px;
   padding: 12px 28px;
   border-radius: 24px 24px 0 0;
@@ -26,13 +23,24 @@ const HeaderWrapper = styled.nav`
   ${breakpointsMedia({
     md: css`
       position: relative;
-      margin-top: 32px;
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
-      padding: 0 16px;
-      max-width: 768px;
+      margin-top: 0;
+      padding: 28px 0;
       border-radius: 0;
+    `,
+  })}
+`;
+
+HeaderWrapper.Content = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+
+  ${breakpointsMedia({
+    md: css`
+      max-width: 768px;
     `,
     lg: css`
       max-width: 1160px;
@@ -79,6 +87,12 @@ const ButtonsArea = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
+
+  ${breakpointsMedia({
+    md: css`
+      max-width: 300px;
+    `,
+  })}
 `;
 
 ButtonsArea.Add = styled.div`
@@ -127,31 +141,33 @@ ButtonsArea.Profile = styled.div`
 export default function LoggedHeader() {
   return (
     <HeaderWrapper>
-      <HeaderWrapper.LeftSide>
-        <Logo />
-      </HeaderWrapper.LeftSide>
-      <HeaderWrapper.RightSide>
-        <SearchArea>
-          <TextField placeholder="Pesquisar" marginBottom="0px" />
-        </SearchArea>
-        <ButtonsArea>
-          <ButtonsArea.Add>
-            <Add size="large" />
-          </ButtonsArea.Add>
-          <ButtonsArea.Home>
-            <Home size="large" />
-          </ButtonsArea.Home>
-          <ButtonsArea.Heart>
-            <Heart size="large" />
-          </ButtonsArea.Heart>
-          <ButtonsArea.Profile>
-            <img src="/images/Avatar.png" width="32" alt="Profile" />
-          </ButtonsArea.Profile>
-          <ButtonsArea.Search>
-            <Search size="large" />
-          </ButtonsArea.Search>
-        </ButtonsArea>
-      </HeaderWrapper.RightSide>
+      <HeaderWrapper.Content>
+        <HeaderWrapper.LeftSide>
+          <Logo />
+        </HeaderWrapper.LeftSide>
+        <HeaderWrapper.RightSide>
+          <SearchArea>
+            <TextField placeholder="Pesquisar" marginBottom="0px" />
+          </SearchArea>
+          <ButtonsArea>
+            <ButtonsArea.Add>
+              <Add size="large" />
+            </ButtonsArea.Add>
+            <ButtonsArea.Home>
+              <Home size="large" />
+            </ButtonsArea.Home>
+            <ButtonsArea.Heart>
+              <Heart size="large" />
+            </ButtonsArea.Heart>
+            <ButtonsArea.Profile>
+              <img src="/images/Avatar.png" width="32" alt="Profile" />
+            </ButtonsArea.Profile>
+            <ButtonsArea.Search>
+              <Search size="large" />
+            </ButtonsArea.Search>
+          </ButtonsArea>
+        </HeaderWrapper.RightSide>
+      </HeaderWrapper.Content>
     </HeaderWrapper>
   );
 }
