@@ -60,6 +60,8 @@ const Col = styled.div`
   ${propToStyle('alignItems')};
   ${propToStyle('justifyContent')};
   ${propToStyle('justifyItems')};
+  ${propToStyle('marginTop')};
+  ${propToStyle('marginBottom')};
   ${propToStyle('paddingLeft')};
   ${propToStyle('paddingRight')};
   ${propToStyle('order')};

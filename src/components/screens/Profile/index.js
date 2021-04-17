@@ -72,6 +72,21 @@ ProfileDescription.Mobile = styled.div`
   })}
 `;
 
+const PhotoGrid = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+
+  ${breakpointsMedia({
+    md: css`
+      gap: 16px;
+    `,
+    lg: css`
+      gap: 32px;
+    `,
+  })}
+`;
+
 export default function ProfileScreen({ user, posts }) {
   const firstPost = posts[0];
   console.log(posts);
@@ -113,6 +128,25 @@ export default function ProfileScreen({ user, posts }) {
             <Text tag="span" variant="titleXS">Mario Souto</Text>
             <Text tag="span" variant="paragraph1" color="tertiary.light">Uma descrição do Mario Souto</Text>
           </ProfileDescription.Mobile>
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col
+          value={{ xs: 12, md: 10, lg: 8 }}
+          offset={{ xs: 0, md: 1, lg: 2 }}
+          marginTop="72px"
+          marginBottom="72px"
+        >
+          <PhotoGrid>
+            {posts.map((post) => (
+              <img
+                key={post._id}
+                src={post.photoUrl}
+                alt={post.description}
+                width="100%"
+              />
+            ))}
+          </PhotoGrid>
         </Grid.Col>
       </Grid.Row>
     </Grid.Container>
