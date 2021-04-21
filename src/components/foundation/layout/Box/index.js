@@ -27,6 +27,7 @@ const Box = styled.div`
   ${propToStyle('maxWidth')};
   ${propToStyle('maxHeight')};
   ${propToStyle('borderRadius')};
+  ${propToStyle('position')};
   ${({ theme, backgroundColorTheme }) => {
     const color = get(theme, `colors.${backgroundColorTheme}.color`);
     return css`

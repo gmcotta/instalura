@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
+import Button from '../../commons/Button';
 
-export default function FormCreatePost({ modalProps }) {
+export default function FormCreatePost({ modalProps, onClose }) {
   return (
     <Grid.Row style={{
       position: 'relative',
@@ -26,6 +27,19 @@ export default function FormCreatePost({ modalProps }) {
           borderRadius="8px"
           {...modalProps}
         >
+          <Button
+            ghost
+            onClick={onClose}
+            style={{
+              position: 'absolute',
+              top: '16px',
+              right: '32px',
+              padding: '0',
+              fontSize: '0',
+            }}
+          >
+            <img src="/images/close.svg" alt="Fechar Modal" />
+          </Button>
           <span>Oi</span>
         </Box>
       </Grid.Col>
@@ -35,4 +49,5 @@ export default function FormCreatePost({ modalProps }) {
 
 FormCreatePost.propTypes = {
   modalProps: PropTypes.objectOf(PropTypes.object).isRequired,
+  onClose: PropTypes.func.isRequired,
 };

@@ -87,7 +87,7 @@ export default function WebsitePageWrapper({
           motionAnimate={isCreatePostModalOpen ? 'opened' : 'closed'}
         >
           {(modalProps) => (
-            <FormCreatePost modalProps={modalProps} />
+            <FormCreatePost modalProps={modalProps} onClose={closeCreatePostModal} />
           )}
         </Modal>
         {menuProps.showMenu && <Menu onCadastrarClick={openModal} />}

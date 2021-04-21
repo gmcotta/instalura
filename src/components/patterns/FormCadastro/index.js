@@ -251,8 +251,21 @@ export default function FormCadastro({ modalProps, onClose }) {
             md: '85px',
           }}
           backgroundColor="white"
+          position="relative"
           {...modalProps}
         >
+          <Button
+            ghost
+            onClick={onClose}
+            style={{
+              position: 'absolute',
+              top: '16px',
+              right: '16px',
+              padding: '0',
+            }}
+          >
+            <img src="/images/close.svg" alt="Fechar Modal" />
+          </Button>
           <FormContent onClose={onClose} />
         </Box>
       </Grid.Col>
