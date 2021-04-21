@@ -15,6 +15,7 @@ export default function WebsitePageWrapper({
   children, seoProps, pageBoxProps, menuProps, footerProps, messages,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(true);
 
   function openModal() {
     setIsModalOpen(true);
@@ -24,10 +25,20 @@ export default function WebsitePageWrapper({
     setIsModalOpen(false);
   }
 
+  function openCreatePostModal() {
+    setIsCreatePostModalOpen(true);
+  }
+
+  function closeCreatePostModal() {
+    setIsCreatePostModalOpen(false);
+  }
+
   return (
     <WebsitePageContext.Provider value={{
       openModalCadastrar: () => { openModal(); },
       closeModalCadastrar: () => { closeModal(); },
+      openModalCreatePost: () => { openCreatePostModal(); },
+      closeModalCreatePost: () => { closeCreatePostModal(); },
       getCMSContent: (cmsKey) => get(messages, cmsKey),
     }}
     >
@@ -38,13 +49,48 @@ export default function WebsitePageWrapper({
         flexDirection="column"
         {...pageBoxProps}
       >
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          motionVariants={{
+            opened: {
+              x: 0,
+            },
+            closed: {
+              x: '100%',
+            },
+          }}
+          motionTransition={{
+            duration: 0.2,
+          }}
+          motionAnimate={isModalOpen ? 'opened' : 'closed'}
+        >
           {(modalProps) => (
             <FormCadastro modalProps={modalProps} onClose={closeModal} />
           )}
         </Modal>
+        <Modal
+          isOpen={isCreatePostModalOpen}
+          onClose={closeCreatePostModal}
+          motionVariants={{
+            opened: {
+              x: 0,
+            },
+            closed: {
+              x: '-100%',
+            },
+          }}
+          motionTransition={{
+            duration: 0.2,
+          }}
+          motionAnimate={isCreatePostModalOpen ? 'opened' : 'closed'}
+        >
+          {() => (
+            <span>Oi</span>
+          )}
+        </Modal>
         {menuProps.showMenu && <Menu onCadastrarClick={openModal} />}
-        {menuProps.showLoggedMenu && <LoggedHeader />}
+        {menuProps.showLoggedMenu && <LoggedHeader onCreatePostClick={openCreatePostModal} />}
         {children}
         {footerProps.showFooter && <Footer />}
       </Box>
