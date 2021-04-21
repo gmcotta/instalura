@@ -10,6 +10,7 @@ import FormCadastro from '../../patterns/FormCadastro';
 import SEO from '../../commons/SEO';
 import { WebsitePageContext } from './context';
 import LoggedHeader from '../../commons/LoggedHeader';
+import FormCreatePost from '../../patterns/FormCreatePost';
 
 export default function WebsitePageWrapper({
   children, seoProps, pageBoxProps, menuProps, footerProps, messages,
@@ -74,10 +75,10 @@ export default function WebsitePageWrapper({
           onClose={closeCreatePostModal}
           motionVariants={{
             opened: {
-              x: 0,
+              opacity: 1,
             },
             closed: {
-              x: '-100%',
+              opacity: 0,
             },
           }}
           motionTransition={{
@@ -85,8 +86,8 @@ export default function WebsitePageWrapper({
           }}
           motionAnimate={isCreatePostModalOpen ? 'opened' : 'closed'}
         >
-          {() => (
-            <span>Oi</span>
+          {(modalProps) => (
+            <FormCreatePost modalProps={modalProps} />
           )}
         </Modal>
         {menuProps.showMenu && <Menu onCadastrarClick={openModal} />}

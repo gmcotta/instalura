@@ -16,20 +16,24 @@ const Box = styled.div`
   ${propToStyle('backgroundPosition')};
   ${propToStyle('boxShadow')};
   ${propToStyle('padding')};
-  ${propToStyle('width')}
-  ${propToStyle('listStyle')}
-  ${propToStyle('margin')}
-  ${propToStyle('marginLeft')}
-  ${propToStyle('marginTop')}
-  ${propToStyle('marginBottom')}
-  ${propToStyle('marginRight')}
+  ${propToStyle('width')};
+  ${propToStyle('height')};
+  ${propToStyle('listStyle')};
+  ${propToStyle('margin')};
+  ${propToStyle('marginLeft')};
+  ${propToStyle('marginTop')};
+  ${propToStyle('marginBottom')};
+  ${propToStyle('marginRight')};
+  ${propToStyle('maxWidth')};
+  ${propToStyle('maxHeight')};
+  ${propToStyle('borderRadius')};
   ${({ theme, backgroundColorTheme }) => {
     const color = get(theme, `colors.${backgroundColorTheme}.color`);
     return css`
       background-color: ${color};
     `;
   }}
-  ${({ theme, borderRadiusTheme }) => borderRadiusTheme && `border-radius: ${theme.borderRadius}`};
+  ${({ theme, borderRadiusTheme }) => borderRadiusTheme && css`border-radius: ${theme.borderRadius}`};
 `;
 
 export default Box;
