@@ -9,8 +9,6 @@ export default function FormCreatePost({ modalProps, onClose }) {
   return (
     <Grid.Row style={{
       position: 'relative',
-      top: '25vh',
-      left: '50vw',
     }}
     >
       <Grid.Col

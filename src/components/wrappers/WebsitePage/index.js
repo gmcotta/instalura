@@ -85,6 +85,8 @@ export default function WebsitePageWrapper({
             duration: 0.2,
           }}
           motionAnimate={isCreatePostModalOpen ? 'opened' : 'closed'}
+          justifyContent="center"
+          alignItems="center"
         >
           {(modalProps) => (
             <FormCreatePost modalProps={modalProps} onClose={closeCreatePostModal} />

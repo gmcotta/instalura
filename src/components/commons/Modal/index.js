@@ -4,8 +4,6 @@ import styled, { css, createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
-import Button from '../Button';
-
 const ModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,7 +40,14 @@ const LockScroll = createGlobalStyle`
 `;
 
 export default function Modal({
-  isOpen, onClose, motionVariants, motionTransition, motionAnimate, children,
+  isOpen,
+  onClose,
+  motionVariants,
+  motionTransition,
+  motionAnimate,
+  justifyContent,
+  alignItems,
+  children,
 }) {
   return (
     <ModalWrapper
@@ -62,6 +67,8 @@ export default function Modal({
         style={{
           display: 'flex',
           flex: 1,
+          justifyContent,
+          alignItems,
         }}
       >
         {children({
@@ -72,11 +79,18 @@ export default function Modal({
   );
 }
 
+Modal.defaultProps = {
+  justifyContent: 'initial',
+  alignItems: 'initial',
+};
+
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   motionVariants: PropTypes.object.isRequired,
   motionTransition: PropTypes.object.isRequired,
   motionAnimate: PropTypes.object.isRequired,
+  justifyContent: PropTypes.string,
+  alignItems: PropTypes.string,
   children: PropTypes.func.isRequired,
 };
