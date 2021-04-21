@@ -6,6 +6,7 @@ import propToStyle from '../../../theme/utils/propToStyle';
 
 const InputWrapper = styled.div`
   ${propToStyle('marginBottom')};
+  ${propToStyle('marginTop')};
 `;
 
 const Input = styled(Text)`
