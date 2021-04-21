@@ -17,12 +17,21 @@ export default function FormCreatePost({ modalProps, onClose }) {
         <Box
           boxShadow="-10px 0px 24px rgba(7, 12, 14, 0.1)"
           backgroundColor="white"
-          width="375px"
-          height="667px"
+          width={{
+            xs: '100vw',
+            md: '375px',
+          }}
+          height={{
+            xs: '100vh',
+            md: '667px',
+          }}
           display="flex"
           alignItems="center"
           justifyContent="center"
-          borderRadius="8px"
+          borderRadius={{
+            xs: '0',
+            md: '8px',
+          }}
           {...modalProps}
         >
           <Button
