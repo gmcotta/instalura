@@ -51,7 +51,7 @@ function FormContent({ onClose }) {
               marginTop: '56px',
             }}
           >
-            <img src={(formStep === 1 && postInfo.photoUrl) || '/images/image.png'} width="100%" alt="Imagem prévia" />
+            <img className="filter-1977" src={(formStep === 1 && postInfo.photoUrl) || '/images/image.png'} width="100%" alt="Imagem prévia" />
           </Box>
         )
       }
