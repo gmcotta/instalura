@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
@@ -7,6 +8,33 @@ import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 import Text from '../../foundation/Text';
 import filter from '../../../theme/filter';
+
+const StepOne = styled.div`
+  padding: 0 24px;
+`;
+
+const StepTwo = styled.div`
+  padding: 24px 24px 0 24px;
+  max-width: 100%;
+`;
+
+const Slider = styled.div`
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory; 
+  margin-bottom: 16px;
+  height: 150px;
+
+  & > button {
+    margin-right: 8px;
+  } 
+
+  & > button:last-child {
+    margin: 0;
+  }
+`;
 
 function FormContent({ onClose }) {
   const filterArray = Object.keys(filter).map((key) => filter[key]);
@@ -25,40 +53,36 @@ function FormContent({ onClose }) {
   }
 
   return (
-    <form style={{ width: '100%' }}>
+    <form style={{ maxWidth: '375px' }}>
       <Button
         type="button"
         ghost
+        position="absolute"
+        top="16px"
+        right="32px"
+        padding="0"
+        fontSize="0"
         onClick={onClose}
-        style={{
-          position: 'absolute',
-          top: '16px',
-          right: '32px',
-          padding: '0',
-          fontSize: '0',
-        }}
       >
         <img src="/images/close.svg" alt="Fechar Modal" />
       </Button>
       {
         formStep < 2 && (
           <Box
-            style={{
-              width: '375px',
-              height: '375px',
-              backgroundColor: '#D4D4D4',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: '56px',
-            }}
+            width="375px"
+            height="375px"
+            backgroundColorTheme="background.secondary"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop="56px"
           >
             <img className={postInfo.filter} src={(formStep === 1 && postInfo.photoUrl) || '/images/image.png'} width="100%" alt="Imagem prévia" />
           </Box>
         )
       }
       {formStep === 0 && (
-        <div style={{ padding: '0 24px' }}>
+        <StepOne>
           <TextField
             placeholder="URL da imagem"
             name="photoUrl"
@@ -84,28 +108,36 @@ function FormContent({ onClose }) {
           >
             Avançar
           </Button>
-        </div>
+        </StepOne>
       )}
       {formStep === 1 && (
-        <div style={{ padding: '24px 24px 0 24px', maxWidth: '100%' }}>
-          <div style={{ display: 'flex', overflowX: 'auto' }}>
+        <StepTwo>
+          <Slider>
             {filterArray.map((item) => (
               <Button
                 ghost
                 padding="0"
                 key={item.name}
                 type="button"
-                style={{ display: 'flex', flexDirection: 'column' }}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
                 onClick={() => setPostInfo({
                   ...postInfo,
                   filter: item.class,
                 })}
               >
                 <img className={item.class} src={postInfo.photoUrl} width="88px" height="88px" alt={`${item.name}`} />
-                <span>{item.name}</span>
+                <Text
+                  variant="smallestException"
+                  color="tertiary.light"
+                  marginTop="12px"
+                >
+                  {item.name}
+                </Text>
               </Button>
             ))}
-          </div>
+          </Slider>
           <Button
             type="button"
             disabled={!postInfo.photoUrl}
@@ -115,7 +147,7 @@ function FormContent({ onClose }) {
           >
             Avançar
           </Button>
-        </div>
+        </StepTwo>
       )}
     </form>
   );

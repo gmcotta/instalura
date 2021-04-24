@@ -37,7 +37,16 @@ const ButtonWrapper = styled.button`
 
   ${propToStyle('margin')};
   ${propToStyle('display')};
+  ${propToStyle('flexDirection')};
+  ${propToStyle('alignItems')};
+  ${propToStyle('justifyContent')};
   ${propToStyle('padding')};
+  ${propToStyle('position')};
+  ${propToStyle('top')};
+  ${propToStyle('right')};
+  ${propToStyle('bottom')};
+  ${propToStyle('left')};
+  ${propToStyle('fontSize')};
 
   ${breakpointsMedia({
     xs: css`

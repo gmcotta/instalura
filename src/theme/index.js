@@ -10,6 +10,9 @@ export const colors = {
     main: {
       color: '#F2F2F2',
     },
+    secondary: {
+      color: '#D4D4D4',
+    },
   },
   borders: {
     main: {
