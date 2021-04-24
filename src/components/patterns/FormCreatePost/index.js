@@ -6,8 +6,10 @@ import Grid from '../../foundation/layout/Grid';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 import Text from '../../foundation/Text';
+import filter from '../../../theme/filter';
 
 function FormContent({ onClose }) {
+  const filterArray = Object.keys(filter).map((key) => filter[key]);
   const [formStep, setFormStep] = useState(0);
   const [postInfo, setPostInfo] = useState({
     photoUrl: '',
@@ -23,7 +25,7 @@ function FormContent({ onClose }) {
   }
 
   return (
-    <form>
+    <form style={{ width: '100%' }}>
       <Button
         type="button"
         ghost
@@ -51,7 +53,7 @@ function FormContent({ onClose }) {
               marginTop: '56px',
             }}
           >
-            <img className="filter-1977" src={(formStep === 1 && postInfo.photoUrl) || '/images/image.png'} width="100%" alt="Imagem prévia" />
+            <img className={postInfo.filter} src={(formStep === 1 && postInfo.photoUrl) || '/images/image.png'} width="100%" alt="Imagem prévia" />
           </Box>
         )
       }
@@ -85,7 +87,25 @@ function FormContent({ onClose }) {
         </div>
       )}
       {formStep === 1 && (
-        <div style={{ padding: '24px 24px 0 24px' }}>
+        <div style={{ padding: '24px 24px 0 24px', maxWidth: '100%' }}>
+          <div style={{ display: 'flex', overflowX: 'auto' }}>
+            {filterArray.map((item) => (
+              <Button
+                ghost
+                padding="0"
+                key={item.name}
+                type="button"
+                style={{ display: 'flex', flexDirection: 'column' }}
+                onClick={() => setPostInfo({
+                  ...postInfo,
+                  filter: item.class,
+                })}
+              >
+                <img className={item.class} src={postInfo.photoUrl} width="88px" height="88px" alt={`${item.name}`} />
+                <span>{item.name}</span>
+              </Button>
+            ))}
+          </div>
           <Button
             type="button"
             disabled={!postInfo.photoUrl}
