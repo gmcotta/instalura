@@ -104,8 +104,13 @@ const PhotoGrid = styled.section`
 `;
 
 export default function ProfileScreen({ user, posts }) {
-  const firstPost = posts[0];
-  console.log(posts);
+  let firstPost = posts[0];
+  if (!firstPost) {
+    firstPost = {
+      photoUrl: '',
+      description: '',
+    };
+  }
   return (
     <>
 
