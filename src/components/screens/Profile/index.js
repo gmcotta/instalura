@@ -1,8 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Logo from '../../../theme/Logo';
+import Router from 'next/router';
+
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 
+import Logo from '../../../theme/Logo';
+import Button from '../../commons/Button';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
 
@@ -164,13 +167,22 @@ export default function ProfileScreen({ user, posts }) {
           >
             <PhotoGrid>
               {posts.map((post) => (
-                <img
-                  className={post.filter}
+                <Button
                   key={post._id}
-                  src={post.photoUrl}
-                  alt={post.description}
-                  width="100%"
-                />
+                  ghost
+                  fontSize="0"
+                  padding="0"
+                  onClick={() => {
+                    Router.push(`/posts/${post._id}`);
+                  }}
+                >
+                  <img
+                    className={post.filter}
+                    src={post.photoUrl}
+                    alt={post.description}
+                    width="100%"
+                  />
+                </Button>
               ))}
             </PhotoGrid>
           </Grid.Col>
