@@ -53,6 +53,11 @@ const TextBase = styled.span`
   ${propToStyle('textAlign')};
   ${propToStyle('marginTop')};
   ${propToStyle('marginBottom')};
+  ${propToStyle('position')};
+  ${propToStyle('top')};
+  ${propToStyle('left')};
+  ${propToStyle('bottom')};
+  ${propToStyle('right')};
 
 
   ${({ tag }) => {

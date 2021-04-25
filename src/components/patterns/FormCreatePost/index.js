@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
@@ -11,11 +11,25 @@ import filter from '../../../theme/filter';
 
 const StepOne = styled.div`
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
 const StepTwo = styled.div`
   padding: 24px 24px 0 24px;
   max-width: 100%;
+`;
+
+const StepThree = styled.div`
+  padding: 56px 24px 24px 24px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Slider = styled.div`
@@ -52,8 +66,20 @@ function FormContent({ onClose }) {
     });
   }
 
+  function submitForm(event) {
+    event.preventDefault();
+  }
+
   return (
-    <form style={{ maxWidth: '375px' }}>
+    <form style={{ width: '375px', height: '100%' }}>
+      <Text
+        position="absolute"
+        top="16px"
+        left="32px"
+        variant="titleXS"
+      >
+        Novo Post
+      </Text>
       <Button
         type="button"
         ghost
@@ -88,7 +114,7 @@ function FormContent({ onClose }) {
             name="photoUrl"
             value={postInfo.photoUrl}
             onChange={handleChange}
-            marginTop="48px"
+            marginTop="56px"
             marginBottom="8px"
           />
           <Text
@@ -148,6 +174,31 @@ function FormContent({ onClose }) {
             Avançar
           </Button>
         </StepTwo>
+      )}
+      {formStep === 2 && (
+        <StepThree>
+          <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            <img className={postInfo.filter} src={postInfo.photoUrl} width="88px" alt="Imagem prévia" />
+
+            <TextField
+              placeholder="Descrição"
+              name="description"
+              value={postInfo.description}
+              onChange={handleChange}
+              marginTop="16px"
+              width="100%"
+            />
+          </div>
+          <Button
+            type="button"
+            disabled={!postInfo.description}
+            variant="primary.main"
+            fullWidth
+            onClick={() => submitForm}
+          >
+            Postar
+          </Button>
+        </StepThree>
       )}
     </form>
   );
