@@ -100,7 +100,7 @@ function FormContent({ onClose }) {
     }).catch((err) => {
       console.error(err);
     }).finally(() => {
-      Router.reload();
+      Router.push('/app/profile');
     });
 
     console.log(response);
