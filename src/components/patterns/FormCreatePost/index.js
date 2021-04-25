@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Router from 'next/router';
 
+import HttpClient from '../../../services/http/httpService';
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 import Text from '../../foundation/Text';
 import filter from '../../../theme/filter';
+import { BASE_URL } from '../../../services/login/loginService';
 
 const StepOne = styled.div`
   padding: 0 24px;
@@ -53,11 +56,12 @@ const Slider = styled.div`
 function FormContent({ onClose }) {
   const filterArray = Object.keys(filter).map((key) => filter[key]);
   const [formStep, setFormStep] = useState(0);
-  const [postInfo, setPostInfo] = useState({
+  const initialValues = {
     photoUrl: '',
     filter: 'none',
     description: '',
-  });
+  };
+  const [postInfo, setPostInfo] = useState(initialValues);
 
   function handleChange(event) {
     return setPostInfo({
@@ -65,9 +69,41 @@ function FormContent({ onClose }) {
       [event.target.name]: event.target.value,
     });
   }
+  function getTokenOnCookies(cookieName) {
+    const cookies = decodeURIComponent(document.cookie);
+    const splitCookies = cookies.split(';');
+    const mapCookies = splitCookies.map((cookie) => {
+      const [key, value] = cookie.split('=');
+      return {
+        [key]: value,
+      };
+    });
 
-  function submitForm(event) {
+    return mapCookies[0][cookieName];
+  }
+
+  async function submitForm(event) {
     event.preventDefault();
+    const token = getTokenOnCookies('LOGIN_COOKIE_APP_TOKEN');
+    const url = `${BASE_URL}/api/posts`;
+    const response = await HttpClient(url, {
+      method: 'POST',
+      body: postInfo,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(() => {
+      setPostInfo((oldValues) => ({
+        ...oldValues,
+        ...initialValues,
+      }));
+    }).catch((err) => {
+      console.error(err);
+    }).finally(() => {
+      Router.reload();
+    });
+
+    console.log(response);
   }
 
   return (
@@ -194,7 +230,7 @@ function FormContent({ onClose }) {
             disabled={!postInfo.description}
             variant="primary.main"
             fullWidth
-            onClick={() => submitForm}
+            onClick={submitForm}
           >
             Postar
           </Button>

@@ -16,7 +16,7 @@ export default function WebsitePageWrapper({
   children, seoProps, pageBoxProps, menuProps, footerProps, messages,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(true);
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
 
   function openModal() {
     setIsModalOpen(true);
