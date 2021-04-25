@@ -160,6 +160,7 @@ export default function ProfileScreen({ user, posts }) {
             <PhotoGrid>
               {posts.map((post) => (
                 <img
+                  className={post.filter}
                   key={post._id}
                   src={post.photoUrl}
                   alt={post.description}
