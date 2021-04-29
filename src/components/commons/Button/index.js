@@ -36,6 +36,10 @@ const ButtonWrapper = styled.button`
   }
 
   ${propToStyle('margin')};
+  ${propToStyle('marginTop')};
+  ${propToStyle('marginRight')};
+  ${propToStyle('marginBottom')};
+  ${propToStyle('marginLeft')};
   ${propToStyle('display')};
   ${propToStyle('flexDirection')};
   ${propToStyle('alignItems')};

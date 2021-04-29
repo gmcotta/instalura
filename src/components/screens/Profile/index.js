@@ -8,6 +8,7 @@ import Logo from '../../../theme/Logo';
 import Button from '../../commons/Button';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
+import Heart from '../../../theme/icons/heart';
 
 const MobileLogoArea = styled.section`
   width: 100%;
@@ -106,8 +107,42 @@ const PhotoGrid = styled.section`
   })}
 `;
 
+const PhotoItem = styled.div`
+  position: relative;
+`;
+
+PhotoItem.PhotoSection = styled.img`
+  width: 100%;
+`;
+
+PhotoItem.LikeSectionWrapper = styled.div`
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: ${({ theme }) => theme.transition};
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    background-color: rgba(255,255,255,0.5);
+  }
+`;
+
+PhotoItem.LikeSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export default function ProfileScreen({ user, posts }) {
   let firstPost = posts[0];
+  console.log(user);
   if (!firstPost) {
     firstPost = {
       photoUrl: '',
@@ -116,7 +151,6 @@ export default function ProfileScreen({ user, posts }) {
   }
   return (
     <>
-
       <MobileLogoArea>
         <Logo size="medium" />
       </MobileLogoArea>
@@ -167,22 +201,36 @@ export default function ProfileScreen({ user, posts }) {
           >
             <PhotoGrid>
               {posts.map((post) => (
-                <Button
+                <PhotoItem
                   key={post._id}
-                  ghost
-                  fontSize="0"
-                  padding="0"
-                  onClick={() => {
-                    Router.push(`/posts/${post._id}`);
-                  }}
                 >
-                  <img
+                  <PhotoItem.PhotoSection
                     className={post.filter}
                     src={post.photoUrl}
                     alt={post.description}
-                    width="100%"
                   />
-                </Button>
+                  <PhotoItem.LikeSectionWrapper>
+                    <PhotoItem.LikeSection>
+                      <Button
+                        ghost
+                        fontSize="0"
+                        padding="0"
+                      >
+                        <Heart />
+                      </Button>
+                      <span>
+                        {post.likes.length}
+                      </span>
+                      <Button
+                        variant="primary.main"
+                        marginTop="16px"
+                        onClick={() => Router.push(`/app/posts/${post._id}`)}
+                      >
+                        Ver post
+                      </Button>
+                    </PhotoItem.LikeSection>
+                  </PhotoItem.LikeSectionWrapper>
+                </PhotoItem>
               ))}
             </PhotoGrid>
           </Grid.Col>
