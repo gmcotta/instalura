@@ -155,6 +155,13 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
     };
   }
 
+  function checkUserLikePost(loggedUser, post) {
+    const postWithoutLikeIndex = post.likes.findIndex(
+      (like) => like.user === loggedUser.id,
+    );
+    return postWithoutLikeIndex !== -1;
+  }
+
   function updatePostList(oldPosts, newPost) {
     const postIndex = oldPosts.findIndex(
       (oldPost) => oldPost._id === newPost._id,
@@ -252,7 +259,7 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
                         padding="0"
                         onClick={() => handleLikeClick(post)}
                       >
-                        <Heart />
+                        <Heart isActive={checkUserLikePost(user, post)} />
                       </Button>
                       <span>
                         {post.likes.length}
