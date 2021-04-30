@@ -155,6 +155,15 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
     };
   }
 
+  function updatePostList(oldPosts, newPost) {
+    const postIndex = oldPosts.findIndex(
+      (oldPost) => oldPost._id === newPost._id,
+    );
+    const newPosts = [...posts];
+    newPosts[postIndex] = newPost;
+    setPosts(newPosts);
+  }
+
   async function handleLikeClick(post) {
     const url = `${BASE_URL}/api/posts/${post._id}/like`;
     await HttpClient(url, {
@@ -164,12 +173,13 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
       },
     }).then(({ data }) => {
       if (data) {
-        const postIndex = posts.findIndex(
-          (oldPost) => oldPost._id === data._id,
+        updatePostList(posts, data);
+      } else {
+        const postWithoutLikeIndex = post.likes.findIndex(
+          (like) => like.user === user._id,
         );
-        const newPosts = [...posts];
-        newPosts[postIndex] = data;
-        setPosts(newPosts);
+        post.likes.splice(postWithoutLikeIndex, 1);
+        updatePostList(posts, post);
       }
     });
   }
