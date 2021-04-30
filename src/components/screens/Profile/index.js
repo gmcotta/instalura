@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Router from 'next/router';
+import { parseCookies } from 'nookies';
 
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
+import HttpClient from '../../../services/http/httpService';
+import { BASE_URL } from '../../../services/login/loginService';
 
 import Logo from '../../../theme/Logo';
 import Button from '../../commons/Button';
@@ -140,15 +143,37 @@ PhotoItem.LikeSection = styled.div`
   align-items: center;
 `;
 
-export default function ProfileScreen({ user, posts }) {
+export default function ProfileScreen({ user, posts: originalPosts }) {
+  const [posts, setPosts] = useState(originalPosts);
+  const token = parseCookies().LOGIN_COOKIE_APP_TOKEN;
   let firstPost = posts[0];
-  console.log(user);
+
   if (!firstPost) {
     firstPost = {
       photoUrl: '',
       description: '',
     };
   }
+
+  async function handleLikeClick(post) {
+    const url = `${BASE_URL}/api/posts/${post._id}/like`;
+    await HttpClient(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(({ data }) => {
+      if (data) {
+        const postIndex = posts.findIndex(
+          (oldPost) => oldPost._id === data._id,
+        );
+        const newPosts = [...posts];
+        newPosts[postIndex] = data;
+        setPosts(newPosts);
+      }
+    });
+  }
+
   return (
     <>
       <MobileLogoArea>
@@ -215,6 +240,7 @@ export default function ProfileScreen({ user, posts }) {
                         ghost
                         fontSize="0"
                         padding="0"
+                        onClick={() => handleLikeClick(post)}
                       >
                         <Heart />
                       </Button>
