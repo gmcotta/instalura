@@ -21,7 +21,7 @@ export default function LoggedHeader({ onCreatePostClick }) {
             <TextField placeholder="Pesquisar" marginBottom="0px" />
           </SearchArea>
           <ButtonsArea>
-            <ButtonsArea.Add ghost onClick={onCreatePostClick}>
+            <ButtonsArea.Add id="addPostButton" ghost onClick={onCreatePostClick}>
               <Add size="large" />
             </ButtonsArea.Add>
             <ButtonsArea.Home>

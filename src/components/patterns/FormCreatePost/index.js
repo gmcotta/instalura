@@ -100,6 +100,7 @@ function FormContent({ onClose }) {
     }).catch((err) => {
       console.error(err);
     }).finally(() => {
+      onClose();
       Router.push('/app/profile');
     });
 
@@ -107,7 +108,7 @@ function FormContent({ onClose }) {
   }
 
   return (
-    <form style={{ width: '375px', height: '100%' }}>
+    <form id="createPostForm" style={{ width: '375px', height: '100%' }}>
       <Text
         position="absolute"
         top="16px"
@@ -162,6 +163,7 @@ function FormContent({ onClose }) {
             Formatos suportados: jpg, png, svg e xpto.
           </Text>
           <Button
+            id="buttonGoToStep2"
             type="button"
             disabled={!postInfo.photoUrl}
             variant="primary.main"
@@ -177,6 +179,7 @@ function FormContent({ onClose }) {
           <Slider>
             {filterArray.map((item) => (
               <Button
+                id={`button-${item.class}`}
                 ghost
                 padding="0"
                 key={item.name}
@@ -201,6 +204,7 @@ function FormContent({ onClose }) {
             ))}
           </Slider>
           <Button
+            id="buttonGoToStep3"
             type="button"
             disabled={!postInfo.photoUrl}
             variant="primary.main"
@@ -226,7 +230,8 @@ function FormContent({ onClose }) {
             />
           </div>
           <Button
-            type="button"
+            id="buttonCreatePost"
+            type="submit"
             disabled={!postInfo.description}
             variant="primary.main"
             fullWidth

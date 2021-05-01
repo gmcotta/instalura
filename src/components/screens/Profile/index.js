@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
+import { Lottie } from '@crello/react-lottie';
 
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import HttpClient from '../../../services/http/httpService';
@@ -12,6 +13,8 @@ import Button from '../../commons/Button';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
 import Heart from '../../../theme/icons/heart';
+
+import likeAnimation from './animations/like.json';
 
 const MobileLogoArea = styled.section`
   width: 100%;
@@ -159,6 +162,7 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
     const postWithoutLikeIndex = post.likes.findIndex(
       (like) => like.user === loggedUser.id,
     );
+    // return postWithoutLikeIndex !== -1 ? 1 : -1;
     return postWithoutLikeIndex !== -1;
   }
 
@@ -214,7 +218,7 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
               <ProfileInfo>
                 <ProfileStatus>
                   <ProfileStatus.Info>
-                    <Text tag="span" variant="titleXS">{posts.length}</Text>
+                    <Text id="publicationNumber" tag="span" variant="titleXS">{posts.length}</Text>
                     <Text tag="span" variant="paragraph1" color="tertiary.light">Publicações</Text>
                   </ProfileStatus.Info>
                 </ProfileStatus>
@@ -260,6 +264,20 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
                         onClick={() => handleLikeClick(post)}
                       >
                         <Heart isActive={checkUserLikePost(user, post)} />
+                        {/* <Lottie
+                          height="48px"
+                          width="48px"
+                          config={{
+                            animationData: likeAnimation,
+                            loop: false,
+                            autoplay: false,
+                            rendererSettings: {
+                              preserveAspectRatio: 'xMidYMid slice',
+                            },
+                          }}
+                          playingState="stopped"
+                          direction={checkUserLikePost(user, post)}
+                        /> */}
                       </Button>
                       <span>
                         {post.likes.length}

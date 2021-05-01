@@ -13,7 +13,6 @@ const sizes = {
 };
 
 export default function Heart({ size, isActive }) {
-  console.log(isActive);
   const { width, height } = sizes[size] || sizes.small;
   const fillColor = isActive ? 'red' : 'none';
   const strokeColor = isActive ? 'red' : 'black';
