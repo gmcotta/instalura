@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
 import { Lottie } from '@crello/react-lottie';
+import PropTypes from 'prop-types';
 
 import HttpClient from '../../../services/http/httpService';
 import { BASE_URL } from '../../../services/login/loginService';
@@ -178,3 +179,10 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
     </>
   );
 }
+
+ProfileScreen.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  user: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  posts: PropTypes.array.isRequired,
+};
