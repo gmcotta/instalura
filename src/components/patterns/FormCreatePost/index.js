@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Router from 'next/router';
+import { parseCookies } from 'nookies';
 
 import HttpClient from '../../../services/http/httpService';
+import { BASE_URL } from '../../../services/login/loginService';
+import filter from '../../../theme/filter';
+
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
 import Button from '../../commons/Button';
 import TextField from '../../forms/TextField';
 import Text from '../../foundation/Text';
-import filter from '../../../theme/filter';
-import { BASE_URL } from '../../../services/login/loginService';
 import Slider from '../../commons/Slider';
 
 const StepOne = styled.div`
@@ -52,42 +54,37 @@ function FormContent({ onClose }) {
       [event.target.name]: event.target.value,
     });
   }
-  function getTokenOnCookies(cookieName) {
-    const cookies = decodeURIComponent(document.cookie);
-    const splitCookies = cookies.split(';');
-    const mapCookies = splitCookies.map((cookie) => {
-      const [key, value] = cookie.split('=');
-      return {
-        [key]: value,
-      };
-    });
-
-    return mapCookies[0][cookieName];
-  }
 
   async function submitForm(event) {
     event.preventDefault();
-    const token = getTokenOnCookies('LOGIN_COOKIE_APP_TOKEN');
+    const token = parseCookies().LOGIN_COOKIE_APP_TOKEN;
     const url = `${BASE_URL}/api/posts`;
-    const response = await HttpClient(url, {
+
+    await HttpClient(url, {
       method: 'POST',
       body: postInfo,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }).then(() => {
+      console.log('sucesso');
+    }).catch((err) => {
+      console.error(err);
+    }).finally(() => {
       setPostInfo((oldValues) => ({
         ...oldValues,
         ...initialValues,
       }));
-    }).catch((err) => {
-      console.error(err);
-    }).finally(() => {
+      setFormStep(0);
       onClose();
-      Router.push('/app/profile');
-    });
 
-    console.log(response);
+      const { pathname } = Router.router;
+      if (pathname === '/app/profile') {
+        Router.reload();
+      } else {
+        Router.push('/app/profile');
+      }
+    });
   }
 
   return (
