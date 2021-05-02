@@ -11,6 +11,7 @@ import TextField from '../../forms/TextField';
 import Text from '../../foundation/Text';
 import filter from '../../../theme/filter';
 import { BASE_URL } from '../../../services/login/loginService';
+import Slider from '../../commons/Slider';
 
 const StepOne = styled.div`
   padding: 0 24px;
@@ -33,24 +34,6 @@ const StepThree = styled.div`
   flex: 1;
   align-items: center;
   justify-content: space-between;
-`;
-
-const Slider = styled.div`
-  display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory; 
-  margin-bottom: 16px;
-  height: 150px;
-
-  & > button {
-    margin-right: 8px;
-  } 
-
-  & > button:last-child {
-    margin: 0;
-  }
 `;
 
 function FormContent({ onClose }) {
