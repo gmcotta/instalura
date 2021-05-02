@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
 import { Lottie } from '@crello/react-lottie';
 
-import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import HttpClient from '../../../services/http/httpService';
 import { BASE_URL } from '../../../services/login/loginService';
 
@@ -13,138 +11,18 @@ import Button from '../../commons/Button';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
 import Heart from '../../../theme/icons/heart';
+import {
+  MobileLogoArea,
+  PhotoGrid,
+  PhotoItem,
+  ProfileDescription,
+  ProfileInfo,
+  ProfilePhoto,
+  ProfileSection,
+  ProfileStatus,
+} from './styles';
 
 import likeAnimation from './animations/like.json';
-
-const MobileLogoArea = styled.section`
-  width: 100%;
-  margin-bottom: 16px;
-  padding: 12px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-
-  ${breakpointsMedia({
-    md: css`
-      display: none;
-    `,
-  })}
-`;
-
-const ProfileSection = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const ProfilePhoto = styled.img`
-  border-radius: 50%;
-  width: 88px;
-  ${breakpointsMedia({
-    md: css`
-      width: 100px;
-    `,
-    lg: css`
-      width: 160px;
-    `,
-  })}
-`;
-
-const ProfileInfo = styled.div`
-  flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-left: 29px;
-  ${breakpointsMedia({
-    md: css`
-      margin-left: 58px;
-    `,
-    lg: css`
-      margin-left: 74px;
-    `,
-  })}
-`;
-const ProfileStatus = styled.div`
-  display: flex;
-  justify-content: space-between;
-  
-`;
-ProfileStatus.Info = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const ProfileDescription = styled.div`
-  display: none;
-  margin-top: 32px;
-
-  ${breakpointsMedia({
-    md: css`
-      display: flex;
-      flex-direction: column;
-    `,
-  })}
-`;
-
-ProfileDescription.Mobile = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 16px;
-
-  ${breakpointsMedia({
-    md: css`
-      display: none;
-    `,
-  })}
-`;
-
-const PhotoGrid = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 4px;
-
-  ${breakpointsMedia({
-    md: css`
-      gap: 16px;
-    `,
-    lg: css`
-      gap: 32px;
-    `,
-  })}
-`;
-
-const PhotoItem = styled.div`
-  position: relative;
-`;
-
-PhotoItem.PhotoSection = styled.img`
-  width: 100%;
-`;
-
-PhotoItem.LikeSectionWrapper = styled.div`
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: ${({ theme }) => theme.transition};
-
-  &:hover,
-  &:focus {
-    opacity: 1;
-    background-color: rgba(255,255,255,0.5);
-  }
-`;
-
-PhotoItem.LikeSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 export default function ProfileScreen({ user, posts: originalPosts }) {
   const [posts, setPosts] = useState(originalPosts);
