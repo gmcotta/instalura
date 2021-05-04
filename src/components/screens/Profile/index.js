@@ -21,6 +21,7 @@ import {
   ProfilePhoto,
   ProfileSection,
   ProfileStatus,
+  LikeButton,
 } from './styles';
 
 import likeAnimation from './animations/like.json';
@@ -75,71 +76,68 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
   }
 
   return (
-    <>
-      <MobileLogoArea>
-        <Logo size="medium" />
-      </MobileLogoArea>
-      <Grid.Container
-        marginTop={{
-          md: '72px',
-        }}
-      >
-        <Grid.Row>
-          <Grid.Col
-            value={{ xs: 12, md: 8, lg: 6 }}
-            offset={{ xs: 0, md: 2, lg: 3 }}
-          >
-            <ProfileSection>
-              <ProfilePhoto
-                src={firstPost.photoUrl}
-                alt={firstPost.description}
-              />
-              <ProfileInfo>
-                <ProfileStatus>
-                  <ProfileStatus.Info>
-                    <Text id="publicationNumber" tag="span" variant="titleXS">{posts.length}</Text>
-                    <Text tag="span" variant="paragraph1" color="tertiary.light">Publicações</Text>
-                  </ProfileStatus.Info>
-                </ProfileStatus>
-                <ProfileDescription>
-                  <Text tag="span" variant="titleXS">Mario Souto</Text>
-                  <Text tag="span" variant="paragraph1" color="tertiary.light">Uma descrição do Mario Souto</Text>
-                </ProfileDescription>
-              </ProfileInfo>
-            </ProfileSection>
-          </Grid.Col>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Col>
-            <ProfileDescription.Mobile>
-              <Text tag="span" variant="titleXS">Mario Souto</Text>
-              <Text tag="span" variant="paragraph1" color="tertiary.light">Uma descrição do Mario Souto</Text>
-            </ProfileDescription.Mobile>
-          </Grid.Col>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Col
-            value={{ xs: 12, md: 10, lg: 8 }}
-            offset={{ xs: 0, md: 1, lg: 2 }}
-            marginTop="72px"
-            marginBottom="72px"
-          >
-            <PhotoGrid>
-              {posts.map((post) => (
-                <PhotoItem
-                  key={post._id}
-                >
-                  <PhotoItem.PhotoSection
-                    className={post.filter}
-                    src={post.photoUrl}
-                    alt={post.description}
-                  />
-                  <PhotoItem.LikeSectionWrapper>
-                    <PhotoItem.LikeSection>
+    <Grid.Container
+      marginTop={{
+        md: '72px',
+      }}
+    >
+      <Grid.Row>
+        <Grid.Col
+          value={{ xs: 12, md: 8, lg: 6 }}
+          offset={{ xs: 0, md: 2, lg: 3 }}
+        >
+          <ProfileSection>
+            <ProfilePhoto
+              src={firstPost.photoUrl}
+              alt={firstPost.description}
+            />
+            <ProfileInfo>
+              <ProfileStatus>
+                <ProfileStatus.Info>
+                  <Text id="publicationNumber" tag="span" variant="titleXS">{posts.length}</Text>
+                  <Text tag="span" variant="paragraph1" color="tertiary.light">Publicações</Text>
+                </ProfileStatus.Info>
+              </ProfileStatus>
+              <ProfileDescription>
+                <Text tag="span" variant="titleXS">Mario Souto</Text>
+                <Text tag="span" variant="paragraph1" color="tertiary.light">Uma descrição do Mario Souto</Text>
+              </ProfileDescription>
+            </ProfileInfo>
+          </ProfileSection>
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col>
+          <ProfileDescription.Mobile>
+            <Text tag="span" variant="titleXS">Mario Souto</Text>
+            <Text tag="span" variant="paragraph1" color="tertiary.light">Uma descrição do Mario Souto</Text>
+          </ProfileDescription.Mobile>
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col
+          value={{ xs: 12, md: 10, lg: 8 }}
+          offset={{ xs: 0, md: 1, lg: 2 }}
+          marginTop="72px"
+          marginBottom="72px"
+        >
+          <PhotoGrid>
+            {posts.map((post) => (
+              <PhotoItem
+                key={post._id}
+              >
+                <PhotoItem.PhotoSection
+                  className={post.filter}
+                  src={post.photoUrl}
+                  alt={post.description}
+                />
+                <PhotoItem.LikeSectionWrapper>
+                  <PhotoItem.LikeSection>
+                    <LikeButton>
                       <Button
                         ghost
                         fontSize="0"
-                        padding="0"
+                        padding="0px"
                         onClick={() => handleLikeClick(post)}
                       >
                         <Heart isActive={checkUserLikePost(user, post)} />
@@ -158,25 +156,28 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
                           direction={checkUserLikePost(user, post)}
                         /> */}
                       </Button>
-                      <span>
+                      <Text variant="smallestException" marginTop={{ xs: '0px', md: '8px' }} marginLeft={{ xs: '4px', md: '0px' }}>
                         {post.likes.length}
-                      </span>
-                      <Button
-                        variant="primary.main"
-                        marginTop="16px"
-                        onClick={() => Router.push(`/app/posts/${post._id}`)}
-                      >
-                        Ver post
-                      </Button>
-                    </PhotoItem.LikeSection>
-                  </PhotoItem.LikeSectionWrapper>
-                </PhotoItem>
-              ))}
-            </PhotoGrid>
-          </Grid.Col>
-        </Grid.Row>
-      </Grid.Container>
-    </>
+                      </Text>
+                    </LikeButton>
+                    <Button
+                      variant="primary.main"
+                      marginTop={{
+                        xs: '8px',
+                        md: '16px',
+                      }}
+                      onClick={() => Router.push(`/app/posts/${post._id}`)}
+                    >
+                      Ver post
+                    </Button>
+                  </PhotoItem.LikeSection>
+                </PhotoItem.LikeSectionWrapper>
+              </PhotoItem>
+            ))}
+          </PhotoGrid>
+        </Grid.Col>
+      </Grid.Row>
+    </Grid.Container>
   );
 }
 

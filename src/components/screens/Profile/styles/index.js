@@ -1,21 +1,6 @@
 import styled, { css } from 'styled-components';
 import breakpointsMedia from '../../../../theme/utils/breakpointsMedia';
 
-export const MobileLogoArea = styled.section`
-  width: 100%;
-  margin-bottom: 16px;
-  padding: 12px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-
-  ${breakpointsMedia({
-    md: css`
-      display: none;
-    `,
-  })}
-`;
-
 export const ProfileSection = styled.section`
   display: flex;
   align-items: center;
@@ -94,6 +79,20 @@ export const PhotoGrid = styled.section`
     `,
     lg: css`
       gap: 32px;
+    `,
+  })}
+`;
+
+export const LikeButton = styled.div`
+  display: flex;
+  ${breakpointsMedia({
+    xs: css`
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    `,
+    md: css`
+      flex-direction: column;
     `,
   })}
 `;

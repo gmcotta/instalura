@@ -21,7 +21,7 @@ const DefaultButton = css`
 const ButtonWrapper = styled.button`
   border: 0;
   cursor: pointer;
-  padding: 12px 26px;
+  
   font-weight: bold;
   opacity: 1;
   
@@ -34,6 +34,19 @@ const ButtonWrapper = styled.button`
   &:focus {
     opacity: 0.5;
   }
+
+  ${breakpointsMedia({
+    xs: css`
+      ${TextStyleVariantsMap.smallestException};
+      padding: 6px 13px;
+      ${propToStyle('padding')};
+    `,
+    md: css`
+      ${TextStyleVariantsMap.paragraph1};
+      padding: 12px 26px;
+      ${propToStyle('padding')};
+    `,
+  })}
 
   ${propToStyle('margin')};
   ${propToStyle('marginTop')};
@@ -52,14 +65,7 @@ const ButtonWrapper = styled.button`
   ${propToStyle('left')};
   ${propToStyle('fontSize')};
 
-  ${breakpointsMedia({
-    xs: css`
-      ${TextStyleVariantsMap.smallestException}
-    `,
-    md: css`
-      ${TextStyleVariantsMap.paragraph1}
-    `,
-  })}
+  
 
   &:disabled {
     cursor: not-allowed;

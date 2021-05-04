@@ -2,11 +2,27 @@ import styled, { css } from 'styled-components';
 import breakpointsMedia from '../../../../theme/utils/breakpointsMedia';
 import Button from '../../Button';
 
+export const MobileLogoArea = styled.section`
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 12px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+
+  ${breakpointsMedia({
+    md: css`
+      display: none;
+    `,
+  })}
+`;
+
 export const HeaderWrapper = styled.nav`
   background-color: #FFF;
   margin-top: 18px;
   padding: 12px 28px;
   border-radius: 24px 24px 0 0;
+  z-index: 100;
 
   position: fixed;
   left: 0;
