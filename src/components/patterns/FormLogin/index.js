@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as yup from 'yup';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import TextField from '../../forms/TextField';
 import Button from '../../commons/Button';
 import loginService from '../../../services/login/loginService';
 import useForm from '../../../infra/hooks/forms/useForm';
+import Text from '../../foundation/Text';
 
 const loginSchema = yup.object().shape({
   username: yup.string()
@@ -19,6 +20,7 @@ const loginSchema = yup.object().shape({
 
 export default function LoginForm({ onSubmit }) {
   const router = useRouter();
+  const [hasError, setHasError] = useState(false);
   const initialValues = {
     username: '',
     password: '',
@@ -32,9 +34,11 @@ export default function LoginForm({ onSubmit }) {
         password: values.password,
       })
         .then(() => {
+          setHasError(false);
           router.push('/app/profile');
         })
         .catch(() => {
+          setHasError(true);
         })
         .finally(() => {
           form.setIsFormDisabled(false);
@@ -47,42 +51,54 @@ export default function LoginForm({ onSubmit }) {
     },
   });
   return (
-    <form id="formLogin" onSubmit={onSubmit || form.handleSubmit}>
-      <TextField
-        placeholder="Usuário"
-        name="username"
-        value={form.values.username}
-        error={form.errors.username}
-        isTouched={form.touched.username}
-        onChange={form.handleChange}
-        onBlur={form.handleBlur}
-        marginBottom="17px"
-      />
-      <TextField
-        placeholder="Senha"
-        name="password"
-        type="password"
-        value={form.values.password}
-        error={form.errors.password}
-        isTouched={form.touched.password}
-        onChange={form.handleChange}
-        onBlur={form.handleBlur}
-        marginBottom="17px"
-      />
+    <>
+      {hasError && (
+        <Text
+          color="error.main"
+          role="alert"
+          marginBottom="16px"
+        >
+          Usuário ou senha incorreta
+        </Text>
 
-      <Button
-        type="submit"
-        variant="primary.main"
-        margin={{
-          xs: '0 auto',
-          md: 'initial',
-        }}
-        fullWidth
-        disabled={form.isFormDisabled}
-      >
-        Entrar
-      </Button>
-    </form>
+      )}
+      <form id="formLogin" onSubmit={onSubmit || form.handleSubmit}>
+        <TextField
+          placeholder="Usuário"
+          name="username"
+          value={form.values.username}
+          error={form.errors.username}
+          isTouched={form.touched.username}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          marginBottom="17px"
+        />
+        <TextField
+          placeholder="Senha"
+          name="password"
+          type="password"
+          value={form.values.password}
+          error={form.errors.password}
+          isTouched={form.touched.password}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+          marginBottom="17px"
+        />
+
+        <Button
+          type="submit"
+          variant="primary.main"
+          margin={{
+            xs: '0 auto',
+            md: 'initial',
+          }}
+          fullWidth
+          disabled={form.isFormDisabled}
+        >
+          Entrar
+        </Button>
+      </form>
+    </>
   );
 }
 
