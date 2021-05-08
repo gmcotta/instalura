@@ -64,8 +64,8 @@ const ButtonWrapper = styled.button`
   ${propToStyle('bottom')};
   ${propToStyle('left')};
   ${propToStyle('fontSize')};
-
-  
+  ${propToStyle('width')};
+  ${propToStyle('height')};
 
   &:disabled {
     cursor: not-allowed;

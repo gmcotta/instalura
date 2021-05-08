@@ -72,6 +72,7 @@ export const PhotoGrid = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 4px;
+  align-items: center;
 
   ${breakpointsMedia({
     md: css`
@@ -120,7 +121,7 @@ PhotoItem.LikeSectionWrapper = styled.div`
   &:hover,
   &:focus {
     opacity: 1;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.3);
   }
 `;
 

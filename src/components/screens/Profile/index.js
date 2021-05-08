@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
-import { Lottie } from '@crello/react-lottie';
 import PropTypes from 'prop-types';
 
 import HttpClient from '../../../services/http/httpService';
 import { BASE_URL } from '../../../services/login/loginService';
 
-import Logo from '../../../theme/Logo';
 import Button from '../../commons/Button';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
 import Heart from '../../../theme/icons/heart';
 import {
-  MobileLogoArea,
   PhotoGrid,
   PhotoItem,
   ProfileDescription,
@@ -23,8 +20,7 @@ import {
   ProfileStatus,
   LikeButton,
 } from './styles';
-
-import likeAnimation from './animations/like.json';
+import LikeAnimation from './components/LikeAnimation';
 
 export default function ProfileScreen({ user, posts: originalPosts }) {
   const [posts, setPosts] = useState(originalPosts);
@@ -139,26 +135,17 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
                         fontSize="0"
                         padding="0px"
                         onClick={() => handleLikeClick(post)}
+                        width={{ xs: '40px', md: '80px' }}
+                        height={{ xs: '24px', md: '80px' }}
                       >
-                        <Heart isActive={checkUserLikePost(user, post)} />
-                        {/* <Lottie
-                          height="48px"
-                          width="48px"
-                          config={{
-                            animationData: likeAnimation,
-                            loop: false,
-                            autoplay: false,
-                            rendererSettings: {
-                              preserveAspectRatio: 'xMidYMid slice',
-                            },
-                          }}
-                          playingState="stopped"
-                          direction={checkUserLikePost(user, post)}
-                        /> */}
+                        <LikeAnimation
+                          isActive={checkUserLikePost(user, post)}
+                        />
                       </Button>
                       <Text variant="smallestException" marginTop={{ xs: '0px', md: '8px' }} marginLeft={{ xs: '4px', md: '0px' }}>
                         {post.likes.length}
                       </Text>
+
                     </LikeButton>
                     <Button
                       variant="primary.main"
