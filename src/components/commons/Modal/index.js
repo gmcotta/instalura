@@ -87,9 +87,18 @@ Modal.defaultProps = {
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  motionVariants: PropTypes.object.isRequired,
-  motionTransition: PropTypes.object.isRequired,
-  motionAnimate: PropTypes.object.isRequired,
+  motionVariants: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
+  motionTransition: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
+  motionAnimate: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
   justifyContent: PropTypes.string,
   alignItems: PropTypes.string,
   children: PropTypes.func.isRequired,

@@ -16,6 +16,7 @@ export default function App({ Component, pageProps }) {
 }
 
 App.propTypes = {
-  Component: PropTypes.element.isRequired,
-  pageProps: PropTypes.objectOf(PropTypes.object).isRequired,
+  Component: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  pageProps: PropTypes.object.isRequired,
 };

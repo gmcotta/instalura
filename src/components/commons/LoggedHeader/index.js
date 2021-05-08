@@ -24,7 +24,13 @@ export default function LoggedHeader({ onCreatePostClick }) {
           </HeaderWrapper.LeftSide>
           <HeaderWrapper.RightSide>
             <SearchArea>
-              <TextField placeholder="Pesquisar" marginBottom="0px" />
+              <TextField
+                marginBottom="0px"
+                value=""
+                name="search"
+                placeholder="Pesquisar"
+                onChange={() => {}}
+              />
             </SearchArea>
             <ButtonsArea>
               <ButtonsArea.Add id="addPostButton" ghost onClick={onCreatePostClick}>

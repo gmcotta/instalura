@@ -265,6 +265,9 @@ FormContent.propTypes = {
 };
 
 FormCreatePost.propTypes = {
-  modalProps: PropTypes.objectOf(PropTypes.object).isRequired,
+  modalProps: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]).isRequired,
   onClose: PropTypes.func.isRequired,
 };

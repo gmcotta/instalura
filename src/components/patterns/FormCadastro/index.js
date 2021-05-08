@@ -278,6 +278,9 @@ FormContent.propTypes = {
 };
 
 FormCadastro.propTypes = {
-  modalProps: PropTypes.objectOf(PropTypes.object).isRequired,
+  modalProps: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
   onClose: PropTypes.func.isRequired,
 };
