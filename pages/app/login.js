@@ -89,7 +89,11 @@ export default websitePageHOC(LoginScreen, {
       headTitle: 'Login',
     },
     menuProps: {
-      display: false,
+      showMenu: false,
+      showLoggedMenu: false,
+    },
+    footerProps: {
+      showFooter: true,
     },
     pageBoxProps: {
       backgroundImage: 'url(/images/bubbles.svg)',

@@ -15,6 +15,7 @@ const Input = styled(Text)`
   padding: 12px 16px;
   outline: 0;
   border-radius: ${({ theme }) => theme.borderRadius};
+  margin-bottom: 0;
 
   ${({ theme, isFieldInvalid }) => isFieldInvalid && css`
     border-color: ${theme.colors.error.main.color};
@@ -39,7 +40,7 @@ export default function TextField({
   const isFieldInvalid = hasError && isTouched;
 
   return (
-    <InputWrapper>
+    <InputWrapper {...props}>
       <Input
         type="text"
         placeholder={placeholder}
