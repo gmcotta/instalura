@@ -9,7 +9,6 @@ import { BASE_URL } from '../../../services/login/loginService';
 import Button from '../../commons/Button';
 import Grid from '../../foundation/layout/Grid';
 import Text from '../../foundation/Text';
-import Heart from '../../../theme/icons/heart';
 import {
   PhotoGrid,
   PhotoItem,
@@ -18,9 +17,8 @@ import {
   ProfilePhoto,
   ProfileSection,
   ProfileStatus,
-  LikeButton,
 } from './styles';
-import LikeAnimation from './components/LikeAnimation';
+import LikeButton from './components/LikeButton';
 
 export default function ProfileScreen({ user, posts: originalPosts }) {
   const [posts, setPosts] = useState(originalPosts);
@@ -129,24 +127,11 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
                 />
                 <PhotoItem.LikeSectionWrapper>
                   <PhotoItem.LikeSection>
-                    <LikeButton>
-                      <Button
-                        ghost
-                        fontSize="0"
-                        padding="0px"
-                        onClick={() => handleLikeClick(post)}
-                        width={{ xs: '40px', md: '80px' }}
-                        height={{ xs: '24px', md: '80px' }}
-                      >
-                        <LikeAnimation
-                          isActive={checkUserLikePost(user, post)}
-                        />
-                      </Button>
-                      <Text variant="smallestException" marginTop={{ xs: '0px', md: '8px' }} marginLeft={{ xs: '4px', md: '0px' }}>
-                        {post.likes.length}
-                      </Text>
-
-                    </LikeButton>
+                    <LikeButton
+                      onClick={() => handleLikeClick(post)}
+                      isLikeActive={checkUserLikePost(user, post)}
+                      likeQuantity={post.likes.length}
+                    />
                     <Button
                       variant="primary.main"
                       marginTop={{

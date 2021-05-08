@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Lottie from 'react-lottie';
 import PropTypes from 'prop-types';
 
-import heartAnimation from '../animations/heart.json';
+import heartAnimation from '../../animations/heart.json';
 
 export default function LikeAnimation({ isActive }) {
   const [animationState, setAnimationState] = useState({
