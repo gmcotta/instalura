@@ -11,7 +11,7 @@ import {
   ButtonsArea, HeaderWrapper, SearchArea, MobileLogoArea,
 } from './HeaderWrapper';
 
-export default function LoggedHeader({ onCreatePostClick }) {
+export default function LoggedHeader({ onCreatePostClick, onProfileModalClick }) {
   return (
     <>
       <MobileLogoArea>
@@ -33,7 +33,11 @@ export default function LoggedHeader({ onCreatePostClick }) {
               />
             </SearchArea>
             <ButtonsArea>
-              <ButtonsArea.Add id="addPostButton" ghost onClick={onCreatePostClick}>
+              <ButtonsArea.Add
+                id="addPostButton"
+                ghost
+                onClick={onCreatePostClick}
+              >
                 <Add size="large" />
               </ButtonsArea.Add>
               <ButtonsArea.Home>
@@ -42,7 +46,7 @@ export default function LoggedHeader({ onCreatePostClick }) {
               <ButtonsArea.Heart>
                 <Heart size="large" />
               </ButtonsArea.Heart>
-              <ButtonsArea.Profile>
+              <ButtonsArea.Profile ghost onClick={onProfileModalClick}>
                 <img src="/images/Avatar.png" width="32" alt="Profile" />
               </ButtonsArea.Profile>
               <ButtonsArea.Search>
@@ -58,4 +62,5 @@ export default function LoggedHeader({ onCreatePostClick }) {
 
 LoggedHeader.propTypes = {
   onCreatePostClick: PropTypes.func.isRequired,
+  onProfileModalClick: PropTypes.func.isRequired,
 };

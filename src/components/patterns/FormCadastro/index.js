@@ -255,14 +255,14 @@ export default function FormCadastro({ modalProps, onClose }) {
           {...modalProps}
         >
           <Button
+            type="button"
             ghost
+            position="absolute"
+            top="16px"
+            right="32px"
+            padding="0"
+            fontSize="0"
             onClick={onClose}
-            style={{
-              position: 'absolute',
-              top: '16px',
-              right: '16px',
-              padding: '0',
-            }}
           >
             <img src="/images/close.svg" alt="Fechar Modal" />
           </Button>

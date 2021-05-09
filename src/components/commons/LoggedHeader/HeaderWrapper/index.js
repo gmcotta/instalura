@@ -141,9 +141,11 @@ ButtonsArea.Search = styled.div`
     `,
   })}
 `;
-ButtonsArea.Profile = styled.div`
+ButtonsArea.Profile = styled(Button)`
   order: 5;
-    ${breakpointsMedia({
+  font-size: 0;
+  padding: 0;
+  ${breakpointsMedia({
     md: css`
       order: 4;
     `,

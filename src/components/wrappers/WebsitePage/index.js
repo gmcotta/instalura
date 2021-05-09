@@ -11,12 +11,14 @@ import SEO from '../../commons/SEO';
 import { WebsitePageContext } from './context';
 import LoggedHeader from '../../commons/LoggedHeader';
 import FormCreatePost from '../../patterns/FormCreatePost';
+import FormProfile from '../../patterns/FormProfile';
 
 export default function WebsitePageWrapper({
   children, seoProps, pageBoxProps, menuProps, footerProps, messages,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   function openModal() {
     setIsModalOpen(true);
@@ -34,12 +36,22 @@ export default function WebsitePageWrapper({
     setIsCreatePostModalOpen(false);
   }
 
+  function openProfileModal() {
+    setIsProfileModalOpen(true);
+  }
+
+  function closeProfileModal() {
+    setIsProfileModalOpen(false);
+  }
+
   return (
     <WebsitePageContext.Provider value={{
       openModalCadastrar: () => { openModal(); },
       closeModalCadastrar: () => { closeModal(); },
       openModalCreatePost: () => { openCreatePostModal(); },
       closeModalCreatePost: () => { closeCreatePostModal(); },
+      openModalProfile: () => { openProfileModal(); },
+      closeModalProfile: () => { closeProfileModal(); },
       getCMSContent: (cmsKey) => get(messages, cmsKey),
     }}
     >
@@ -50,6 +62,7 @@ export default function WebsitePageWrapper({
         flexDirection="column"
         {...pageBoxProps}
       >
+        {/* Cadastro */}
         <Modal
           isOpen={isModalOpen}
           onClose={closeModal}
@@ -70,6 +83,28 @@ export default function WebsitePageWrapper({
             <FormCadastro modalProps={modalProps} onClose={closeModal} />
           )}
         </Modal>
+        {/* Perfil */}
+        <Modal
+          isOpen={isProfileModalOpen}
+          onClose={closeProfileModal}
+          motionVariants={{
+            opened: {
+              x: 0,
+            },
+            closed: {
+              x: '100%',
+            },
+          }}
+          motionTransition={{
+            duration: 0.2,
+          }}
+          motionAnimate={isProfileModalOpen ? 'opened' : 'closed'}
+        >
+          {(modalProps) => (
+            <FormProfile modalProps={modalProps} onClose={closeProfileModal} />
+          )}
+        </Modal>
+        {/* Criar post */}
         <Modal
           isOpen={isCreatePostModalOpen}
           onClose={closeCreatePostModal}
@@ -93,7 +128,13 @@ export default function WebsitePageWrapper({
           )}
         </Modal>
         {menuProps.showMenu && <Menu onCadastrarClick={openModal} />}
-        {menuProps.showLoggedMenu && <LoggedHeader onCreatePostClick={openCreatePostModal} />}
+        {menuProps.showLoggedMenu
+          && (
+          <LoggedHeader
+            onCreatePostClick={openCreatePostModal}
+            onProfileModalClick={openProfileModal}
+          />
+          )}
         {children}
         {footerProps.showFooter && <Footer />}
       </Box>
