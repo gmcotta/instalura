@@ -7,7 +7,7 @@ const Slider = styled.div`
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory; 
   margin-bottom: 16px;
-  height: 150px;
+  height: 120px;
 
   & > button {
     margin-right: 8px;

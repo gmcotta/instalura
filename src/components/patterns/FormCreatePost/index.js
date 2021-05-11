@@ -131,7 +131,7 @@ function FormContent({ onClose }) {
             name="photoUrl"
             value={postInfo.photoUrl}
             onChange={handleChange}
-            marginTop="56px"
+            marginTop="16px"
             marginBottom="8px"
           />
           <Text
@@ -160,6 +160,7 @@ function FormContent({ onClose }) {
             {filterArray.map((item) => (
               <Button
                 id={`button-${item.class}`}
+                height=""
                 ghost
                 padding="0"
                 key={item.name}
@@ -172,7 +173,7 @@ function FormContent({ onClose }) {
                   filter: item.class,
                 })}
               >
-                <img className={item.class} src={postInfo.photoUrl} width="88px" height="88px" alt={`${item.name}`} />
+                <img className={item.class} src={postInfo.photoUrl} width="64px" height="64px" alt={`${item.name}`} />
                 <Text
                   variant="smallestException"
                   color="tertiary.light"
