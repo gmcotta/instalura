@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { parseCookies } from 'nookies';
 import Logo from '../../../theme/Logo';
 import TextField from '../../forms/TextField';
 import Home from '../../../theme/icons/home';
@@ -12,6 +13,7 @@ import {
 } from './HeaderWrapper';
 
 export default function LoggedHeader({ onCreatePostClick, onProfileModalClick }) {
+  const userInfo = JSON.parse(parseCookies(null).USER_INFO);
   return (
     <>
       <MobileLogoArea>
@@ -47,7 +49,7 @@ export default function LoggedHeader({ onCreatePostClick, onProfileModalClick })
                 <Heart size="large" />
               </ButtonsArea.Heart>
               <ButtonsArea.Profile ghost onClick={onProfileModalClick}>
-                <img src="/images/Avatar.png" width="32" alt="Profile" />
+                <img src={userInfo.photoUrl} width="32" alt="Profile" style={{ borderRadius: '50%' }} />
               </ButtonsArea.Profile>
               <ButtonsArea.Search>
                 <Search size="large" />

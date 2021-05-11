@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as yup from 'yup';
 import PropTypes from 'prop-types';
+import { setCookie } from 'nookies';
 
 import TextField from '../../forms/TextField';
 import Button from '../../commons/Button';
@@ -33,8 +34,21 @@ export default function LoginForm({ onSubmit }) {
         username: values.username,
         password: values.password,
       })
-        .then(() => {
+        .then((data) => {
           setHasError(false);
+          const DAY_IN_SECONDS = 86400;
+          setCookie(
+            null,
+            'USER_INFO',
+            JSON.stringify({
+              name: data.user.name,
+              username: data.user.username,
+            }),
+            {
+              path: '/',
+              maxAge: DAY_IN_SECONDS * 7,
+            },
+          );
           router.push('/app/profile');
         })
         .catch(() => {

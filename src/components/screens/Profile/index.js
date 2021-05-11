@@ -23,6 +23,7 @@ import LikeButton from './components/LikeButton';
 export default function ProfileScreen({ user, posts: originalPosts }) {
   const [posts, setPosts] = useState(originalPosts);
   const token = parseCookies().LOGIN_COOKIE_APP_TOKEN;
+  const userInfo = JSON.parse(parseCookies(null).USER_INFO);
   let firstPost = posts[0];
 
   if (!firstPost) {
@@ -82,8 +83,8 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
         >
           <ProfileSection>
             <ProfilePhoto
-              src={firstPost.photoUrl}
-              alt={firstPost.description}
+              src={userInfo.photoUrl}
+              alt="Profile"
             />
             <ProfileInfo>
               <ProfileStatus>
@@ -93,8 +94,8 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
                 </ProfileStatus.Info>
               </ProfileStatus>
               <ProfileDescription>
-                <Text tag="span" variant="titleXS">Mario Souto</Text>
-                <Text tag="span" variant="paragraph1" color="tertiary.light">Uma descrição do Mario Souto</Text>
+                <Text tag="span" variant="titleXS">{userInfo.name}</Text>
+                <Text tag="span" variant="paragraph1" color="tertiary.light">{userInfo.description}</Text>
               </ProfileDescription>
             </ProfileInfo>
           </ProfileSection>
@@ -103,8 +104,8 @@ export default function ProfileScreen({ user, posts: originalPosts }) {
       <Grid.Row>
         <Grid.Col>
           <ProfileDescription.Mobile>
-            <Text tag="span" variant="titleXS">Mario Souto</Text>
-            <Text tag="span" variant="paragraph1" color="tertiary.light">Uma descrição do Mario Souto</Text>
+            <Text tag="span" variant="titleXS">{userInfo.name}</Text>
+            <Text tag="span" variant="paragraph1" color="tertiary.light">{userInfo.description}</Text>
           </ProfileDescription.Mobile>
         </Grid.Col>
       </Grid.Row>

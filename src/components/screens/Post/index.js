@@ -2,26 +2,12 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import PropTypes from 'prop-types';
 
+import { parseCookies } from 'nookies';
 import Grid from '../../foundation/layout/Grid';
-import Logo from '../../../theme/Logo';
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
 import Heart from '../../../theme/icons/heart';
-
-const MobileLogoArea = styled.section`
-  width: 100%;
-  margin-bottom: 16px;
-  padding: 12px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-
-  ${breakpointsMedia({
-    md: css`
-      display: none;
-    `,
-  })}
-`;
 
 const Card = styled.section`
   background-color: ${({ theme, color }) => get(theme, `colors.${color}.color`)};
@@ -47,14 +33,12 @@ Card.Footer = styled.footer`
 
 export default function PostScreen({ posts }) {
   const router = useRouter();
+  const userInfo = JSON.parse(parseCookies(null).USER_INFO);
   const { _id } = router.query;
   const selectedPost = posts.find((post) => post._id === _id);
   console.log(_id, selectedPost);
   return (
     <>
-      <MobileLogoArea>
-        <Logo size="medium" />
-      </MobileLogoArea>
       <Grid.Container
         marginTop={{
           md: '72px',
@@ -67,13 +51,23 @@ export default function PostScreen({ posts }) {
           >
             <Card color="background.light">
               <Card.Header>
-                <img src={selectedPost.photoUrl} style={{ borderRadius: '50%', width: '50px' }} />
-                <span>nic.cage</span>
+                <img
+                  src={userInfo.photoUrl}
+                  style={{ borderRadius: '50%', width: '50px' }}
+                  alt="Profile"
+                />
+                <span>{userInfo.username}</span>
               </Card.Header>
-              <img className={selectedPost.filter} src={selectedPost.photoUrl} alt={selectedPost.description} width="100%" />
+              <img
+                className={selectedPost.filter}
+                src={selectedPost.photoUrl}
+                alt={selectedPost.description}
+                width="100%"
+              />
               <Card.Footer>
                 <Heart size="large" />
                 <span>{selectedPost.likes.length}</span>
+                <span>{selectedPost.description}</span>
               </Card.Footer>
             </Card>
           </Grid.Col>
@@ -82,3 +76,8 @@ export default function PostScreen({ posts }) {
     </>
   );
 }
+
+PostScreen.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  posts: PropTypes.array.isRequired,
+};
