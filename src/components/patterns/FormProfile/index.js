@@ -19,12 +19,18 @@ export default function FormProfile({ modalProps, onClose }) {
       marginRight={0}
       flex={1}
       justifyContent="flex-end"
+      width={{
+        xs: '100%',
+        md: '420px',
+      }}
     >
       <Grid.Col
         display="flex"
         paddingRight={{ md: '0px' }}
-        flex={1}
-        value={{ xs: 12, md: 5, lg: 4 }}
+        flex="1"
+        value={{
+          xs: 12, md: 7, lg: 5, xl: 4,
+        }}
       >
         <Box
           boxShadow="-10px 0px 24px rgba(7, 12, 14, 0.1)"

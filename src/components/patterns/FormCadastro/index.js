@@ -123,6 +123,7 @@ function FormContent({ onClose }) {
             disabled={isFormInvalid}
             variant="primary.main"
             fullWidth
+            padding="12px 26px"
           >
             Cadastrar
           </Button>
@@ -236,8 +237,10 @@ export default function FormCadastro({ modalProps, onClose }) {
       <Grid.Col
         display="flex"
         paddingRight={{ md: '0px' }}
-        flex={1}
-        value={{ xs: 12, md: 5, lg: 4 }}
+        flex="1"
+        value={{
+          xs: 12, md: 8, lg: 6, xl: 4,
+        }}
       >
         <Box
           boxShadow="-10px 0px 24px rgba(7, 12, 14, 0.1)"

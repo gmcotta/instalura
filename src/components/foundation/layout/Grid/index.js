@@ -46,6 +46,7 @@ const Row = styled.div`
   ${propToStyle('justifyContent')}
   ${propToStyle('marginBottom')}
   ${propToStyle('flexDirection')}
+  ${propToStyle('width')}
 `;
 
 const Col = styled.div`
@@ -67,6 +68,7 @@ const Col = styled.div`
   ${propToStyle('order')};
   ${propToStyle('gridTemplateColumns')}
   ${propToStyle('gap')}
+  ${propToStyle('width')}
 
   ${({ value }) => {
     if (typeof value === 'number') {
