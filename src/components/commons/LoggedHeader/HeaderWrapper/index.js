@@ -115,9 +115,11 @@ ButtonsArea.Add = styled(Button)`
     `,
   })}
 `;
-ButtonsArea.Home = styled.div`
+ButtonsArea.Home = styled(Button)`
   order: 1;
-    ${breakpointsMedia({
+  font-size: 0;
+  padding: 0;
+  ${breakpointsMedia({
     md: css`
       order: 2;
     `,
@@ -125,7 +127,7 @@ ButtonsArea.Home = styled.div`
 `;
 ButtonsArea.Heart = styled.div`
   order: 4;
-    ${breakpointsMedia({
+  ${breakpointsMedia({
     md: css`
       order: 3;
     `,

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 
 import { parseCookies } from 'nookies';
 import Logo from '../../../theme/Logo';
@@ -13,7 +14,11 @@ import {
 } from './HeaderWrapper';
 
 export default function LoggedHeader({ onCreatePostClick, onProfileModalClick }) {
-  const userInfo = JSON.parse(parseCookies(null).USER_INFO);
+  const rawUserInfo = parseCookies(null).USER_INFO;
+  let userInfo = {};
+  if (rawUserInfo) {
+    userInfo = JSON.parse(rawUserInfo);
+  }
   return (
     <>
       <MobileLogoArea>
@@ -42,7 +47,12 @@ export default function LoggedHeader({ onCreatePostClick, onProfileModalClick })
               >
                 <Add size="large" />
               </ButtonsArea.Add>
-              <ButtonsArea.Home>
+              <ButtonsArea.Home
+                ghost
+                onClick={() => {
+                  Router.push('/app/profile');
+                }}
+              >
                 <Home size="large" />
               </ButtonsArea.Home>
               <ButtonsArea.Heart>
