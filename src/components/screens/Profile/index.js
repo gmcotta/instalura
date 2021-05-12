@@ -23,7 +23,11 @@ import LikeButton from './components/LikeButton';
 export default function ProfileScreen({ user, posts: originalPosts }) {
   const [posts, setPosts] = useState(originalPosts);
   const token = parseCookies().LOGIN_COOKIE_APP_TOKEN;
-  const userInfo = JSON.parse(parseCookies(null).USER_INFO);
+  const rawUserInfo = parseCookies(null).USER_INFO;
+  let userInfo = {};
+  if (rawUserInfo) {
+    userInfo = JSON.parse(rawUserInfo);
+  }
   let firstPost = posts[0];
 
   if (!firstPost) {

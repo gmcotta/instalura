@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
-
 import { parseCookies } from 'nookies';
-import Grid from '../../foundation/layout/Grid';
+
 import breakpointsMedia from '../../../theme/utils/breakpointsMedia';
-import Heart from '../../../theme/icons/heart';
+import propToStyle from '../../../theme/utils/propToStyle';
+
+import Grid from '../../foundation/layout/Grid';
+import Text from '../../foundation/Text';
+import LikeButton from './components/LikeButton';
+import { BASE_URL } from '../../../services/login/loginService';
+import HttpClient from '../../../services/http/httpService';
 
 const Card = styled.section`
   background-color: ${({ theme, color }) => get(theme, `colors.${color}.color`)};
+  border-radius: 8px;
 `;
 
 Card.Header = styled.header`
+  display: flex;
+  align-items: center;
   ${breakpointsMedia({
     xs: css`
       padding: 16px 28px;
@@ -25,18 +33,81 @@ Card.Header = styled.header`
   
 `;
 
-Card.Content = styled.div``;
-
 Card.Footer = styled.footer`
-  padding: 26px 44px;
+  ${breakpointsMedia({
+    xs: css`
+      padding: 16px 28px;
+    `,
+    md: css`
+      padding: 26px 44px;
+    `,
+  })}
+`;
+
+Card.Row = styled.div`
+  display: flex;
+  align-items: center;
+  ${propToStyle('marginTop')};
+  
 `;
 
 export default function PostScreen({ posts }) {
+  const [selectedPost, setSelectedPost] = useState({
+    likes: [],
+  });
+
   const router = useRouter();
-  const userInfo = JSON.parse(parseCookies(null).USER_INFO);
   const { _id } = router.query;
-  const selectedPost = posts.find((post) => post._id === _id);
-  console.log(_id, selectedPost);
+
+  const rawUserInfo = parseCookies(null).USER_INFO;
+  console.log(rawUserInfo);
+  let userInfo = {};
+  if (rawUserInfo) {
+    userInfo = JSON.parse(rawUserInfo);
+  }
+  const token = parseCookies().LOGIN_COOKIE_APP_TOKEN;
+
+  useEffect(() => {
+    setSelectedPost(posts.find((post) => post._id === _id));
+  }, []);
+
+  async function handleLikeClick(post) {
+    const url = `${BASE_URL}/api/posts/${post._id}/like`;
+    await HttpClient(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(({ data }) => {
+      if (data) {
+        setSelectedPost((oldPost) => ({
+          ...oldPost,
+          ...data,
+        }));
+      } else {
+        const postWithoutLikeIndex = post.likes.findIndex(
+          (like) => like.user === _id,
+        );
+        post.likes.splice(postWithoutLikeIndex, 1);
+        setSelectedPost((oldPost) => ({
+          ...oldPost,
+          ...post,
+        }));
+      }
+    });
+  }
+
+  function checkUserLikePost(loggedUser, post) {
+    if (post.likes) {
+      const postWithoutLikeIndex = post.likes.findIndex(
+        (like) => like.user === loggedUser,
+      );
+      // return postWithoutLikeIndex !== -1 ? 1 : -1;
+      return postWithoutLikeIndex !== -1;
+    }
+    return false;
+  }
+
   return (
     <>
       <Grid.Container
@@ -56,7 +127,12 @@ export default function PostScreen({ posts }) {
                   style={{ borderRadius: '50%', width: '50px' }}
                   alt="Profile"
                 />
-                <span>{userInfo.username}</span>
+                <Text
+                  variant="paragraph1"
+                  marginLeft="8px"
+                >
+                  {userInfo.username}
+                </Text>
               </Card.Header>
               <img
                 className={selectedPost.filter}
@@ -65,9 +141,17 @@ export default function PostScreen({ posts }) {
                 width="100%"
               />
               <Card.Footer>
-                <Heart size="large" />
-                <span>{selectedPost.likes.length}</span>
-                <span>{selectedPost.description}</span>
+                <Card.Row>
+                  <LikeButton
+                    onClick={() => handleLikeClick(selectedPost)}
+                    isLikeActive={checkUserLikePost(selectedPost.user, selectedPost)}
+                    likeQuantity={selectedPost.likes.length}
+                  />
+                </Card.Row>
+                <Card.Row marginTop="16px">
+                  <span>{selectedPost.description}</span>
+                </Card.Row>
+
               </Card.Footer>
             </Card>
           </Grid.Col>
