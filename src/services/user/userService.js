@@ -21,7 +21,6 @@ export default function userService() {
         userInfo.photoUrl = response.data[0].photoUrl || '';
         userInfo.description = response.data[0].description || '';
         const DAY_IN_SECONDS = 86400;
-        console.log(userInfo);
         setCookie(ctx, 'USER_INFO', JSON.stringify(userInfo), {
           path: '/',
           maxAge: DAY_IN_SECONDS * 7,
