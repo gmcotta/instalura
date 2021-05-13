@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
+import { Lottie } from '@crello/react-lottie';
 
 import HttpClient from '../../../services/http/httpService';
 import { BASE_URL } from '../../../services/login/loginService';
 import filter from '../../../theme/filter';
+
+import errorAnimation from './animations/error.json';
+import successAnimation from './animations/success.json';
 
 import Box from '../../foundation/layout/Box';
 import Grid from '../../foundation/layout/Grid';
@@ -38,7 +42,26 @@ const StepThree = styled.div`
   justify-content: space-between;
 `;
 
+const StepFour = styled.div`
+  padding: 24px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
 function FormContent({ onClose }) {
+  const formStates = {
+    DEFAULT: 'DEFAULT',
+    LOADING: 'LOADING',
+    DONE: 'DONE',
+    ERROR: 'ERROR',
+  };
+  const [submissionStatus, setSubmissionStatus] = useState(formStates.DEFAULT);
+
   const filterArray = Object.keys(filter).map((key) => filter[key]);
   const [formStep, setFormStep] = useState(0);
   const initialValues = {
@@ -67,23 +90,26 @@ function FormContent({ onClose }) {
         Authorization: `Bearer ${token}`,
       },
     }).then(() => {
-      console.log('sucesso');
-    }).catch((err) => {
-      console.error(err);
+      setSubmissionStatus(formStates.DONE);
+    }).catch(() => {
+      setSubmissionStatus(formStates.ERROR);
     }).finally(() => {
-      setPostInfo((oldValues) => ({
-        ...oldValues,
-        ...initialValues,
-      }));
-      setFormStep(0);
-      onClose();
+      setFormStep(3);
+      setTimeout(() => {
+        setPostInfo((oldValues) => ({
+          ...oldValues,
+          ...initialValues,
+        }));
+        setFormStep(0);
+        onClose();
 
-      const { pathname } = Router.router;
-      if (pathname === '/app/profile') {
-        Router.reload();
-      } else {
-        Router.push('/app/profile');
-      }
+        const { pathname } = Router.router;
+        if (pathname === '/app/profile') {
+          Router.reload();
+        } else {
+          Router.push('/app/profile');
+        }
+      }, 3000);
     });
   }
 
@@ -221,6 +247,66 @@ function FormContent({ onClose }) {
             Postar
           </Button>
         </StepThree>
+      )}
+      {formStep === 3 && submissionStatus === formStates.DONE && (
+        <StepFour>
+          <Lottie
+            width="150px"
+            height="150px"
+            config={{
+              animationData: successAnimation,
+              loop: false,
+              autoplay: true,
+            }}
+          />
+          <Text
+            variant="title"
+            tag="h1"
+            color="tertiary.main"
+            textAlign="center"
+          >
+            Cadastro concluído!
+          </Text>
+          <Text
+            variant="paragraph1"
+            tag="p"
+            color="tertiary.light"
+            marginBottom="32px"
+            textAlign="center"
+          >
+            Você já pode começar a saber da vida dos outros.
+          </Text>
+        </StepFour>
+      )}
+      {formStep === 3 && submissionStatus === formStates.ERROR && (
+        <StepFour>
+          <Lottie
+            width="150px"
+            height="150px"
+            config={{
+              animationData: errorAnimation,
+              loop: false,
+              autoplay: true,
+            }}
+          />
+          <Text
+            variant="title"
+            tag="h1"
+            color="tertiary.main"
+            textAlign="center"
+          >
+            Ops, algo inesperado aconteceu!
+          </Text>
+          <Text
+            variant="paragraph1"
+            tag="p"
+            color="tertiary.light"
+            marginBottom="32px"
+            textAlign="center"
+          >
+            Tente novamente mais tarde.
+          </Text>
+        </StepFour>
       )}
     </form>
   );
