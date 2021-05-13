@@ -52,20 +52,23 @@ Card.Row = styled.div`
 `;
 
 export default function PostScreen({ posts }) {
-  const [selectedPost, setSelectedPost] = useState({
-    likes: [],
-  });
-
+  const token = parseCookies().LOGIN_COOKIE_APP_TOKEN;
   const router = useRouter();
   const { _id } = router.query;
+  const [selectedPost, setSelectedPost] = useState({ likes: [] });
+  const [userInfo, setUserInfo] = useState({
+    user: '',
+    username: '',
+    photoUrl: '',
+    description: '',
+  });
 
-  const rawUserInfo = parseCookies(null).USER_INFO;
-  console.log(rawUserInfo);
-  let userInfo = {};
-  if (rawUserInfo) {
-    userInfo = JSON.parse(rawUserInfo);
-  }
-  const token = parseCookies().LOGIN_COOKIE_APP_TOKEN;
+  useEffect(() => {
+    const rawUserInfo = parseCookies(null).USER_INFO;
+    if (rawUserInfo) {
+      setUserInfo(JSON.parse(rawUserInfo));
+    }
+  }, []);
 
   useEffect(() => {
     setSelectedPost(posts.find((post) => post._id === _id));

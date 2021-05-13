@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
 import PropTypes from 'prop-types';
@@ -21,21 +21,20 @@ import {
 import LikeButton from './components/LikeButton';
 
 export default function ProfileScreen({ user, posts: originalPosts }) {
-  const [posts, setPosts] = useState(originalPosts);
   const token = parseCookies().LOGIN_COOKIE_APP_TOKEN;
-  const rawUserInfo = parseCookies(null).USER_INFO;
-  let userInfo = {};
-  if (rawUserInfo) {
-    userInfo = JSON.parse(rawUserInfo);
-  }
-  let firstPost = posts[0];
-
-  if (!firstPost) {
-    firstPost = {
-      photoUrl: '',
-      description: '',
-    };
-  }
+  const [posts, setPosts] = useState(originalPosts);
+  const [userInfo, setUserInfo] = useState({
+    user: '',
+    username: '',
+    photoUrl: '',
+    description: '',
+  });
+  useEffect(() => {
+    const rawUserInfo = parseCookies(null).USER_INFO;
+    if (rawUserInfo) {
+      setUserInfo(JSON.parse(rawUserInfo));
+    }
+  }, []);
 
   function checkUserLikePost(loggedUser, post) {
     const postWithoutLikeIndex = post.likes.findIndex(

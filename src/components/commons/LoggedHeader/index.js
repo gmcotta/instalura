@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 
@@ -14,11 +14,19 @@ import {
 } from './HeaderWrapper';
 
 export default function LoggedHeader({ onCreatePostClick, onProfileModalClick }) {
-  const rawUserInfo = parseCookies(null).USER_INFO;
-  let userInfo = {};
-  if (rawUserInfo) {
-    userInfo = JSON.parse(rawUserInfo);
-  }
+  const [userInfo, setUserInfo] = useState({
+    user: '',
+    username: '',
+    photoUrl: '',
+    description: '',
+  });
+  useEffect(() => {
+    const rawUserInfo = parseCookies(null).USER_INFO;
+    if (rawUserInfo) {
+      setUserInfo(JSON.parse(rawUserInfo));
+    }
+  }, []);
+
   return (
     <>
       <MobileLogoArea>
