@@ -37,7 +37,6 @@ export default class CreatePostForm {
 
   submitForm() {
     this.cy.get('#buttonCreatePost').click();
-    cy.reload();
     return this;
   }
 }
