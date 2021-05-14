@@ -29,10 +29,10 @@ describe('Login Page', () => {
 
       cy.wait('@userLogin').then((intercept) => {
         const { token } = intercept.response.body.data;
+        console.log(cy.getCookie('LOGIN_COOKIE_APP_TOKEN'));
 
         // Assert
         cy.getCookie('LOGIN_COOKIE_APP_TOKEN')
-          .should('exist')
           .should('have.property', 'value', token);
       });
     });
