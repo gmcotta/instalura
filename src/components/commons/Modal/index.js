@@ -1,9 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import styled, { css, createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-
-import Button from '../Button';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -18,7 +17,7 @@ const ModalWrapper = styled.div`
   margin: auto;
   overflow: hidden;
   transition: 0.3s;
-  z-index: 100;
+  z-index: 150;
 
   ${({ isOpen }) => {
     if (!isOpen) {
@@ -40,7 +39,16 @@ const LockScroll = createGlobalStyle`
   }
 `;
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({
+  isOpen,
+  onClose,
+  motionVariants,
+  motionTransition,
+  motionAnimate,
+  justifyContent,
+  alignItems,
+  children,
+}) {
   return (
     <ModalWrapper
       isOpen={isOpen}
@@ -53,36 +61,16 @@ export default function Modal({ isOpen, onClose, children }) {
     >
       {isOpen && <LockScroll />}
       <motion.div
-        variants={{
-          opened: {
-            x: 0,
-          },
-          closed: {
-            x: '100%',
-          },
-        }}
-        transition={{
-          duration: 0.2,
-        }}
-        animate={isOpen ? 'opened' : 'closed'}
+        variants={motionVariants}
+        transition={motionTransition}
+        animate={motionAnimate}
         style={{
           display: 'flex',
           flex: 1,
-          position: 'relative',
+          justifyContent,
+          alignItems,
         }}
       >
-        <Button
-          ghost
-          onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: '16px',
-            right: '16px',
-            padding: '0',
-          }}
-        >
-          <img src="/images/close.svg" alt="Fechar Modal" />
-        </Button>
         {children({
           'data-modal-safe-area': 'true',
         })}
@@ -91,8 +79,27 @@ export default function Modal({ isOpen, onClose, children }) {
   );
 }
 
+Modal.defaultProps = {
+  justifyContent: 'initial',
+  alignItems: 'initial',
+};
+
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  motionVariants: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
+  motionTransition: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
+  motionAnimate: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
+  justifyContent: PropTypes.string,
+  alignItems: PropTypes.string,
   children: PropTypes.func.isRequired,
 };

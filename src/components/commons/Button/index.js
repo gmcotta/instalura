@@ -21,7 +21,7 @@ const DefaultButton = css`
 const ButtonWrapper = styled.button`
   border: 0;
   cursor: pointer;
-  padding: 12px 26px;
+  
   font-weight: bold;
   opacity: 1;
   
@@ -35,17 +35,37 @@ const ButtonWrapper = styled.button`
     opacity: 0.5;
   }
 
-  ${propToStyle('margin')};
-  ${propToStyle('display')};
-
   ${breakpointsMedia({
     xs: css`
-      ${TextStyleVariantsMap.smallestException}
+      ${TextStyleVariantsMap.smallestException};
+      padding: 6px 13px;
+      ${propToStyle('padding')};
     `,
     md: css`
-      ${TextStyleVariantsMap.paragraph1}
+      ${TextStyleVariantsMap.paragraph1};
+      padding: 12px 26px;
+      ${propToStyle('padding')};
     `,
   })}
+
+  ${propToStyle('margin')};
+  ${propToStyle('marginTop')};
+  ${propToStyle('marginRight')};
+  ${propToStyle('marginBottom')};
+  ${propToStyle('marginLeft')};
+  ${propToStyle('display')};
+  ${propToStyle('flexDirection')};
+  ${propToStyle('alignItems')};
+  ${propToStyle('justifyContent')};
+  ${propToStyle('padding')};
+  ${propToStyle('position')};
+  ${propToStyle('top')};
+  ${propToStyle('right')};
+  ${propToStyle('bottom')};
+  ${propToStyle('left')};
+  ${propToStyle('fontSize')};
+  ${propToStyle('width')};
+  ${propToStyle('height')};
 
   &:disabled {
     cursor: not-allowed;

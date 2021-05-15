@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import get from 'lodash/get';
+
 import propToStyle from '../../../../theme/utils/propToStyle';
 
 const Box = styled.div`
@@ -14,14 +16,25 @@ const Box = styled.div`
   ${propToStyle('backgroundPosition')};
   ${propToStyle('boxShadow')};
   ${propToStyle('padding')};
-  ${propToStyle('width')}
-  ${propToStyle('listStyle')}
-  ${propToStyle('margin')}
-  ${propToStyle('marginLeft')}
-  ${propToStyle('marginTop')}
-  ${propToStyle('marginBottom')}
-  ${propToStyle('marginRight')}
-  ${({ theme, borderRadiusTheme }) => borderRadiusTheme && `border-radius: ${theme.borderRadius}`};
+  ${propToStyle('width')};
+  ${propToStyle('height')};
+  ${propToStyle('listStyle')};
+  ${propToStyle('margin')};
+  ${propToStyle('marginLeft')};
+  ${propToStyle('marginTop')};
+  ${propToStyle('marginBottom')};
+  ${propToStyle('marginRight')};
+  ${propToStyle('maxWidth')};
+  ${propToStyle('maxHeight')};
+  ${propToStyle('borderRadius')};
+  ${propToStyle('position')};
+  ${({ theme, backgroundColorTheme }) => {
+    const color = get(theme, `colors.${backgroundColorTheme}.color`);
+    return css`
+      background-color: ${color};
+    `;
+  }}
+  ${({ theme, borderRadiusTheme }) => borderRadiusTheme && css`border-radius: ${theme.borderRadius}`};
 `;
 
 export default Box;

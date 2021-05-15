@@ -9,11 +9,16 @@ import Box from '../../foundation/layout/Box';
 import FormCadastro from '../../patterns/FormCadastro';
 import SEO from '../../commons/SEO';
 import { WebsitePageContext } from './context';
+import LoggedHeader from '../../commons/LoggedHeader';
+import FormCreatePost from '../../patterns/FormCreatePost';
+import FormProfile from '../../patterns/FormProfile';
 
 export default function WebsitePageWrapper({
-  children, seoProps, pageBoxProps, menuProps, messages,
+  children, seoProps, pageBoxProps, menuProps, footerProps, messages,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   function openModal() {
     setIsModalOpen(true);
@@ -23,10 +28,30 @@ export default function WebsitePageWrapper({
     setIsModalOpen(false);
   }
 
+  function openCreatePostModal() {
+    setIsCreatePostModalOpen(true);
+  }
+
+  function closeCreatePostModal() {
+    setIsCreatePostModalOpen(false);
+  }
+
+  function openProfileModal() {
+    setIsProfileModalOpen(true);
+  }
+
+  function closeProfileModal() {
+    setIsProfileModalOpen(false);
+  }
+
   return (
     <WebsitePageContext.Provider value={{
       openModalCadastrar: () => { openModal(); },
       closeModalCadastrar: () => { closeModal(); },
+      openModalCreatePost: () => { openCreatePostModal(); },
+      closeModalCreatePost: () => { closeCreatePostModal(); },
+      openModalProfile: () => { openProfileModal(); },
+      closeModalProfile: () => { closeProfileModal(); },
       getCMSContent: (cmsKey) => get(messages, cmsKey),
     }}
     >
@@ -37,14 +62,81 @@ export default function WebsitePageWrapper({
         flexDirection="column"
         {...pageBoxProps}
       >
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {/* Cadastro */}
+        <Modal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          motionVariants={{
+            opened: {
+              x: 0,
+            },
+            closed: {
+              x: '100%',
+            },
+          }}
+          motionTransition={{
+            duration: 0.2,
+          }}
+          motionAnimate={isModalOpen ? 'opened' : 'closed'}
+        >
           {(modalProps) => (
             <FormCadastro modalProps={modalProps} onClose={closeModal} />
           )}
         </Modal>
+        {/* Perfil */}
+        <Modal
+          isOpen={isProfileModalOpen}
+          onClose={closeProfileModal}
+          motionVariants={{
+            opened: {
+              x: 0,
+            },
+            closed: {
+              x: '100%',
+            },
+          }}
+          motionTransition={{
+            duration: 0.2,
+          }}
+          motionAnimate={isProfileModalOpen ? 'opened' : 'closed'}
+        >
+          {(modalProps) => (
+            <FormProfile modalProps={modalProps} onClose={closeProfileModal} />
+          )}
+        </Modal>
+        {/* Criar post */}
+        <Modal
+          isOpen={isCreatePostModalOpen}
+          onClose={closeCreatePostModal}
+          motionVariants={{
+            opened: {
+              opacity: 1,
+            },
+            closed: {
+              opacity: 0,
+            },
+          }}
+          motionTransition={{
+            duration: 0.2,
+          }}
+          motionAnimate={isCreatePostModalOpen ? 'opened' : 'closed'}
+          justifyContent="center"
+          alignItems="center"
+        >
+          {(modalProps) => (
+            <FormCreatePost modalProps={modalProps} onClose={closeCreatePostModal} />
+          )}
+        </Modal>
         {menuProps.showMenu && <Menu onCadastrarClick={openModal} />}
+        {menuProps.showLoggedMenu
+          && (
+          <LoggedHeader
+            onCreatePostClick={openCreatePostModal}
+            onProfileModalClick={openProfileModal}
+          />
+          )}
         {children}
-        <Footer />
+        {footerProps.showFooter && <Footer />}
       </Box>
     </WebsitePageContext.Provider>
   );
@@ -55,6 +147,10 @@ WebsitePageWrapper.defaultProps = {
   pageBoxProps: {},
   menuProps: {
     showMenu: true,
+    showLoggedMenu: false,
+  },
+  footerProps: {
+    showFooter: true,
   },
   messages: {},
 };
@@ -65,13 +161,18 @@ WebsitePageWrapper.propTypes = {
   }),
   menuProps: PropTypes.shape({
     showMenu: PropTypes.bool,
+    showLoggedMenu: PropTypes.bool,
   }),
   pageBoxProps: PropTypes.shape({
     backgroundImage: PropTypes.string,
     backgroundRepeat: PropTypes.string,
     backgroundPosition: PropTypes.string,
+    backgroundColor: PropTypes.string,
     flexWrap: PropTypes.string,
     justifyContent: PropTypes.string,
+  }),
+  footerProps: PropTypes.shape({
+    showFooter: PropTypes.bool,
   }),
   children: PropTypes.node.isRequired,
   // eslint-disable-next-line react/forbid-prop-types

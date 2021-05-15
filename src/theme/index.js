@@ -1,5 +1,6 @@
 import breakpoints from './breakpoints';
 import typographyVariants from './typographyVariants';
+import filter from './filter';
 
 export const colors = {
   background: {
@@ -8,6 +9,9 @@ export const colors = {
     },
     main: {
       color: '#F2F2F2',
+    },
+    secondary: {
+      color: '#D4D4D4',
     },
   },
   borders: {
@@ -97,4 +101,5 @@ export default {
   transition: '200ms ease-in-out',
   fontFamily: '\'Rubik\', sans-serif',
   breakpoints,
+  filter,
 };

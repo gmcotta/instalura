@@ -106,6 +106,7 @@ function FormContent({ onClose }) {
               name="nome"
               value={userInfo.nome}
               onChange={handleChange}
+              marginBottom="17px"
             />
           </div>
           <div>
@@ -114,6 +115,7 @@ function FormContent({ onClose }) {
               name="usuario"
               value={userInfo.usuario}
               onChange={handleChange}
+              marginBottom="17px"
             />
           </div>
           <Button
@@ -121,6 +123,7 @@ function FormContent({ onClose }) {
             disabled={isFormInvalid}
             variant="primary.main"
             fullWidth
+            padding="12px 26px"
           >
             Cadastrar
           </Button>
@@ -234,8 +237,10 @@ export default function FormCadastro({ modalProps, onClose }) {
       <Grid.Col
         display="flex"
         paddingRight={{ md: '0px' }}
-        flex={1}
-        value={{ xs: 12, md: 5, lg: 4 }}
+        flex="1"
+        value={{
+          xs: 12, md: 8, lg: 6, xl: 4,
+        }}
       >
         <Box
           boxShadow="-10px 0px 24px rgba(7, 12, 14, 0.1)"
@@ -249,8 +254,21 @@ export default function FormCadastro({ modalProps, onClose }) {
             md: '85px',
           }}
           backgroundColor="white"
+          position="relative"
           {...modalProps}
         >
+          <Button
+            type="button"
+            ghost
+            position="absolute"
+            top="16px"
+            right="32px"
+            padding="0"
+            fontSize="0"
+            onClick={onClose}
+          >
+            <img src="/images/close.svg" alt="Fechar Modal" />
+          </Button>
           <FormContent onClose={onClose} />
         </Box>
       </Grid.Col>
@@ -263,6 +281,9 @@ FormContent.propTypes = {
 };
 
 FormCadastro.propTypes = {
-  modalProps: PropTypes.objectOf(PropTypes.object).isRequired,
+  modalProps: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
   onClose: PropTypes.func.isRequired,
 };

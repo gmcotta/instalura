@@ -23,7 +23,7 @@ const loginService = {
       },
     })
       .then((jsonResponse) => {
-        const { token } = jsonResponse.data;
+        const { token, user } = jsonResponse.data;
         const hasToken = !!token;
         const DAY_IN_SECONDS = 86400;
 
@@ -36,11 +36,12 @@ const loginService = {
           maxAge: DAY_IN_SECONDS * 7,
         });
 
-        return { token };
+        return { token, user };
       });
   },
   async logout(ctx, destroyCookieModule = destroyCookie) {
     destroyCookieModule(ctx, LOGIN_COOKIE_APP_TOKEN, { path: '/' });
+    destroyCookieModule(ctx, 'USER_INFO', { path: '/' });
   },
 };
 

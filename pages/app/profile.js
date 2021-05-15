@@ -1,4 +1,5 @@
-import React from 'react';
+import ProfileScreen from '../../src/components/screens/Profile';
+import websitePageHOC from '../../src/components/wrappers/WebsitePage/hoc';
 
 import authService from '../../src/services/auth/authService';
 import userService from '../../src/services/user/userService';
@@ -26,15 +27,19 @@ export async function getServerSideProps(ctx) {
   return ctx.res.end();
 }
 
-export default function ProfilePage(props) {
-  return (
-    <div>
-      Página de Profile!
-      <pre>{JSON.stringify(props, null, 2)}</pre>
-      <img
-        src="https://media.giphy.com/media/bn0zlGb4LOyo8/giphy.gif"
-        alt="Nicolas Cage"
-      />
-    </div>
-  );
-}
+export default websitePageHOC(ProfileScreen, {
+  pageWrapperProps: {
+    pageBoxProps: {
+      flexWrap: 'wrap',
+      backgroundColorTheme: 'background.main',
+    },
+    seoProps: { headTitle: 'Perfil' },
+    menuProps: {
+      showMenu: false,
+      showLoggedMenu: true,
+    },
+    footerProps: {
+      showFooter: false,
+    },
+  },
+});

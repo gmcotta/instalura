@@ -4,5 +4,7 @@ import { createContext } from 'react';
 export const WebsitePageContext = createContext({
   openModalCadastrar: () => {},
   closeModalCadastrar: () => {},
+  openModalCreatePost: () => {},
+  closeModalCreatePost: () => {},
   getCMSContent: () => {},
 });

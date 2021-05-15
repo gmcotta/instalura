@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Text from '../../foundation/Text';
+import propToStyle from '../../../theme/utils/propToStyle';
 
 const InputWrapper = styled.div`
-  margin-bottom: 17px;
+  ${propToStyle('marginBottom')};
+  ${propToStyle('marginTop')};
 `;
 
 const Input = styled(Text)`
@@ -13,6 +15,7 @@ const Input = styled(Text)`
   padding: 12px 16px;
   outline: 0;
   border-radius: ${({ theme }) => theme.borderRadius};
+  margin-bottom: 0;
 
   ${({ theme, isFieldInvalid }) => isFieldInvalid && css`
     border-color: ${theme.colors.error.main.color};
@@ -37,7 +40,7 @@ export default function TextField({
   const isFieldInvalid = hasError && isTouched;
 
   return (
-    <InputWrapper>
+    <InputWrapper {...props}>
       <Input
         type="text"
         placeholder={placeholder}

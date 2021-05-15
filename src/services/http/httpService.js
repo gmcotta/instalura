@@ -9,6 +9,9 @@ export default async function HttpClient(url, { headers, body, ...options }) {
   })
     .then((serverResponse) => {
       if (serverResponse.ok) {
+        if (serverResponse.status === 204) {
+          return serverResponse.text();
+        }
         return serverResponse.json();
       }
 

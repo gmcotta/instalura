@@ -46,6 +46,7 @@ const Row = styled.div`
   ${propToStyle('justifyContent')}
   ${propToStyle('marginBottom')}
   ${propToStyle('flexDirection')}
+  ${propToStyle('width')}
 `;
 
 const Col = styled.div`
@@ -59,15 +60,21 @@ const Col = styled.div`
   ${propToStyle('flexDirection')};
   ${propToStyle('alignItems')};
   ${propToStyle('justifyContent')};
+  ${propToStyle('justifyItems')};
+  ${propToStyle('marginTop')};
+  ${propToStyle('marginBottom')};
   ${propToStyle('paddingLeft')};
   ${propToStyle('paddingRight')};
   ${propToStyle('order')};
+  ${propToStyle('gridTemplateColumns')}
+  ${propToStyle('gap')}
+  ${propToStyle('width')}
 
   ${({ value }) => {
     if (typeof value === 'number') {
       return css`
         flex: 0 0 ${(100 * value) / 12}%;
-        max-width: 0 0 ${(100 * value) / 12}%;
+        max-width: ${(100 * value) / 12}%;
       `;
     }
 
@@ -75,31 +82,31 @@ const Col = styled.div`
       ...(value.xs && {
         xs: css`
           flex: 0 0 ${(100 * value.xs) / 12}%;
-          max-width: 0 0 ${(100 * value.xs) / 12}%;
+          max-width: ${(100 * value.xs) / 12}%;
         `,
       }),
       ...(value.sm && {
         sm: css`
           flex: 0 0 ${(100 * value.sm) / 12}%;
-          max-width: 0 0 ${(100 * value.sm) / 12}%;
+          max-width: ${(100 * value.sm) / 12}%;
         `,
       }),
       ...(value.md && {
         md: css`
           flex: 0 0 ${(100 * value.md) / 12}%;
-          max-width: 0 0 ${(100 * value.md) / 12}%;
+          max-width: ${(100 * value.md) / 12}%;
         `,
       }),
       ...(value.lg && {
         lg: css`
           flex: 0 0 ${(100 * value.lg) / 12}%;
-          max-width: 0 0 ${(100 * value.lg) / 12}%;
+          max-width: ${(100 * value.lg) / 12}%;
         `,
       }),
       ...(value.xl && {
         xl: css`
           flex: 0 0 ${(100 * value.xl) / 12}%;
-          max-width: 0 0 ${(100 * value.xl) / 12}%;
+          max-width: ${(100 * value.xl) / 12}%;
         `,
       }),
     });

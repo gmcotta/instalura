@@ -6,6 +6,10 @@ const sizes = {
     width: 96,
     height: 24,
   },
+  medium: {
+    width: 131,
+    height: 32,
+  },
   large: {
     width: 186,
     height: 46,
