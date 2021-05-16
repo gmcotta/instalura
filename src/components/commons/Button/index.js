@@ -38,7 +38,7 @@ const ButtonWrapper = styled.button`
   ${breakpointsMedia({
     xs: css`
       ${TextStyleVariantsMap.smallestException};
-      padding: 6px 13px;
+      padding: 16px 13px;
       ${propToStyle('padding')};
     `,
     md: css`

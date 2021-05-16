@@ -61,7 +61,7 @@ export default function HomeScreen() {
         <Grid.Col value={{ xs: 12, md: 6 }}>
           <img
             alt="Imagem de dois celulares mostrando o perfil do Nicolas Cage"
-            style={{ display: 'block', margin: 'auto' }}
+            style={{ display: 'block', margin: 'auto', width: '100%' }}
             src="https://bootcamp-alura-01-git-modulo01.omariosouto.vercel.app/images/phones.png"
           />
         </Grid.Col>

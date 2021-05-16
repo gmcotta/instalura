@@ -11,6 +11,7 @@ const Container = styled.div`
   max-width: initial;
 
   ${propToStyle('marginTop')};
+  ${propToStyle('marginBottom')};
   ${propToStyle('display')};
   ${propToStyle('flex')};
   ${propToStyle('alignItems')};
