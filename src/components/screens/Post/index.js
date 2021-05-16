@@ -117,6 +117,7 @@ export default function PostScreen({ posts }) {
         marginTop={{
           md: '72px',
         }}
+        marginBottom="72px"
       >
         <Grid.Row>
           <Grid.Col
